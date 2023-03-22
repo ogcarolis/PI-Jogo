@@ -1,0 +1,14 @@
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\PI Cartagena Jogo.exe.config
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\PI Cartagena Jogo.exe
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\PI Cartagena Jogo.pdb
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\CartagenaServer.dll
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\CartagenaServer.xml
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.AssemblyReference.cache
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.SuggestedBindingRedirects.cache
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI_Cartagena_Jogo.Form1.resources
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI_Cartagena_Jogo.Properties.Resources.resources
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.GenerateResource.cache
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.CoreCompileInputs.cache
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.CopyComplete
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.exe
+C:\Users\carol\source\repos\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.pdb
