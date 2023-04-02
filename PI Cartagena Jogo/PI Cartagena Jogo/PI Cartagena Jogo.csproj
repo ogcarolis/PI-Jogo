@@ -55,10 +55,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mapa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mapa.Designer.cs">
+      <DependentUpon>Mapa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mapa.resx">
+      <DependentUpon>Mapa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,6 +109,99 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\fundo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\cartaGarrafa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\azul1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\azul2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\azul3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\azul4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\verde1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\verde2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\verde3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\verde4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vermelho3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vermelho4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laranja1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laranja2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laranja3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laranja4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vermelho1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vermelho2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carta_esqueleto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carta_chave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carta_faca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carta_garrafa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carta_pistola.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carta_tricornio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\esqueleto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\faca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\garrafa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pistola.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tricornio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tabuleiro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barco.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
