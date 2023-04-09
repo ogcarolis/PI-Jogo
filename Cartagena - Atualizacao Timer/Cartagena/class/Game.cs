@@ -181,7 +181,6 @@ namespace Cartagena{
 
             for (int i = 0; i < posicao.Length - 1; i++)
             {
-                MessageBox.Show(posicao[i]);
                 string[] infoPosicao = posicao[i].Split(',');
 
                 Tabuleiro t = new Tabuleiro();

@@ -32,3 +32,20 @@ C:\Users\carol\Downloads\Cartagena\Cartagena\obj\Debug\Cartagena.csproj.CoreComp
 C:\Users\carol\Downloads\Cartagena\Cartagena\obj\Debug\Cartagena.csproj.CopyComplete
 C:\Users\carol\Downloads\Cartagena\Cartagena\obj\Debug\Cartagena.exe
 C:\Users\carol\Downloads\Cartagena\Cartagena\obj\Debug\Cartagena.pdb
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\bin\Debug\Cartagena.exe.config
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\bin\Debug\Cartagena.exe
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\bin\Debug\Cartagena.pdb
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\bin\Debug\CartagenaServer.dll
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\bin\Debug\CartagenaServer.xml
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.csproj.AssemblyReference.cache
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.csproj.SuggestedBindingRedirects.cache
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.CadastrarPartidaView.resources
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.InicioView.resources
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.view.MensagensView.resources
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.PartidaView.resources
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.Properties.Resources.resources
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.csproj.GenerateResource.cache
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.csproj.CoreCompileInputs.cache
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.csproj.CopyComplete
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.exe
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.pdb

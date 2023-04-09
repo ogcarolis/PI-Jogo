@@ -37,19 +37,6 @@ namespace Cartagena
             
         }
 
-        private void btnAtualizar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                preencherDataGridJogadoresView();
-            }
-            catch (Exception e1)
-            {
-                enviaMsg(e1.Message, "erro");
-            }
-           
-        }
-
         private void btnIniciarPartida_Click(object sender, EventArgs e)
         {
             try
@@ -113,27 +100,27 @@ namespace Cartagena
                         w += 89;
                     }
 
-                    if (i > 3 && i <= 9)
+                    if (i > 3 && i < 9)
                     {
                         w -= 89;
                     }
 
-                    if (i > 9 && i <= 15)
+                    if (i > 9 && i < 15)
                     {
                         w += 89;
                     }
 
-                    if (i > 16 && i <= 21)
+                    if (i > 15 && i < 21)
                     {
                         w -= 89;
                     }
 
-                    if (i > 22 && i <= 27)
+                    if (i > 21 && i < 27)
                     {
                         w += 89;
                     }
 
-                    if (i > 28 && i <= 33)
+                    if (i > 27 && i < 33)
                     {
                         w -= 89;
                     }
@@ -143,7 +130,7 @@ namespace Cartagena
                         w += 89;
                     }
 
-                    if (i == 3 || i == 10 || i == 15 || i == 22 || i == 28 || i == 33)
+                    if (i == 3 || i == 9 || i == 15 || i == 21 || i == 27 || i == 33)
                     {
                         h -= 93;
                     }
@@ -153,7 +140,7 @@ namespace Cartagena
             catch (Exception e1)
             {
                 enviaMsg(e1.Message, "erro");
-            }      
+            }
         }
 
         private void exibirCartas()
