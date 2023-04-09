@@ -1,0 +1,17 @@
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\bin\Debug\Cartagena.exe.config
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\bin\Debug\Cartagena.exe
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\bin\Debug\Cartagena.pdb
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\bin\Debug\CartagenaServer.dll
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\bin\Debug\CartagenaServer.xml
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.csproj.AssemblyReference.cache
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.csproj.SuggestedBindingRedirects.cache
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.InicioView.resources
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.Properties.Resources.resources
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.csproj.GenerateResource.cache
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.csproj.CoreCompileInputs.cache
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.csproj.CopyComplete
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.exe
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.pdb
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.CadastrarPartidaView.resources
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.PartidaView.resources
+C:\Users\aline\Documents\Visual Studio 2022\Cartagena\Cartagena\obj\Debug\Cartagena.view.MensagensView.resources
