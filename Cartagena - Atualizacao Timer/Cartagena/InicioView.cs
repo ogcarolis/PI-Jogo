@@ -24,7 +24,10 @@ namespace Cartagena
             {
                 game = new Game();
                 meuJogador = new Jogador();
+
+                tmrJogador.Enabled = true;
                 tmrPartida.Enabled = true;
+
                 preencherDataGridView();
             }
             catch (Exception e)
@@ -58,9 +61,9 @@ namespace Cartagena
 
                     this.idPartida = int.Parse(row.Cells["Id"].Value.ToString());
                     lblNomePartida.Text = "Partida Selecionada: " + row.Cells["Nome"].Value.ToString();
-                    panelEntrar.Visible = true;
 
-                    tmrJogador.Enabled = true;                    
+                    preencherDataGridJogadoresView();
+                    panelEntrar.Visible = true;             
                 }
             }
             catch (Exception e1)
@@ -148,7 +151,9 @@ namespace Cartagena
 
         private void tmrJogador_Tick(object sender, EventArgs e)
         {
-            preencherDataGridJogadoresView();
+            if(this.idPartida != 0 && dtgJogadores.Visible == true) {
+                preencherDataGridJogadoresView();
+            }
         }
     }
 }
