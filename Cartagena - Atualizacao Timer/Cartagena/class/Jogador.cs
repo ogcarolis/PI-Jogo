@@ -10,6 +10,9 @@ namespace Cartagena {
         string nome;
         string senha;
         string cor;
+        bool minhaVez;
+        int qtdJogadas;
+
         List<Pirata> piratas;
 
         public int Id
@@ -34,6 +37,18 @@ namespace Cartagena {
         {
             get { return cor; }
             set { cor = value; }
+        }
+
+        public bool MinhaVez
+        {
+            get { return minhaVez; }
+            set { minhaVez = value; }
+        }
+
+        public int QtdJogadas
+        {
+            get { return qtdJogadas; }
+            set { qtdJogadas = value; }
         }
 
         public List<Pirata> Piratas

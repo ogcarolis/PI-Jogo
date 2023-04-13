@@ -81,9 +81,37 @@ namespace Cartagena{
             return cartas;
         }
 
-        public void moverPirata(Jogador j, int posicao, Carta c)
+        public Jogador verificaVez(List<Jogador> jogadores, int id)
         {
-            string retorno = Jogo.Jogar(j.Id, j.Senha, posicao, c.Simbolo);
+            Jogador jVez = new Jogador();
+            string retorno = Jogo.VerificarVez(id);
+
+            if (retorno.Contains("ERRO"))
+            {
+                throw new Exception(retorno.Substring(5));
+            }
+
+            retorno = retorno.Replace("\r", "");
+            string[] info = retorno.Split('\n');
+
+            string[] jogador = info[0].Split(',');
+
+            foreach (Jogador j in jogadores)
+            {
+                if (j.Id == int.Parse(jogador[1]))
+                {
+                    j.MinhaVez = true;
+                    j.QtdJogadas = int.Parse(jogador[2]);
+                    jVez = j;
+                }
+            }
+
+            return jVez;
+        }
+
+        public void moverPirata(Jogador j, int posicao, string simbolo)
+        {
+            string retorno = Jogo.Jogar(j.Id, j.Senha, posicao, simbolo);
 
             if (retorno.Contains("ERRO"))
             {

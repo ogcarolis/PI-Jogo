@@ -14,6 +14,10 @@ namespace Cartagena
     public partial class PartidaView : Form
     {
         int idPartida;
+
+        List<Jogador> jogadores;
+        List<Carta> cartas;
+
         Jogador meuJogador;
         Game game;
         public PartidaView(int id, Jogador j)
@@ -26,7 +30,12 @@ namespace Cartagena
                 meuJogador = j;
 
                 game = new Game();
+                jogadores = new List<Jogador>();
+                cartas = new List<Carta>();
+
                 tmrViewJogadores.Enabled = true;
+                tmrVez.Enabled = true;
+
                 preencherDataGridJogadoresView();
             }
             catch (Exception e)
@@ -47,6 +56,7 @@ namespace Cartagena
                 exibirTabuleiro();
                 exibirCartas();
 
+                panelJogar.Visible = true;
                 btnIniciarPartida.Visible = false;
             }
             catch (Exception e1)
@@ -57,8 +67,7 @@ namespace Cartagena
 
         private void preencherDataGridJogadoresView()
         {
-            List<Jogador> jogadores = new List<Jogador>();
-            jogadores = this.game.exibirJogadores(this.idPartida);
+            this.jogadores = this.game.exibirJogadores(this.idPartida);
 
             dtgJogadores.Columns.Clear();
             dtgJogadores.DataSource = jogadores;
@@ -66,8 +75,10 @@ namespace Cartagena
             dtgJogadores.Columns["Id"].Width = 63;
             dtgJogadores.Columns["Nome"].Width = 110;
             dtgJogadores.Columns["Cor"].Width = 110;
+            dtgJogadores.Columns["QtdJogadas"].Width = 88;
 
             dtgJogadores.Columns["Senha"].Visible = false;
+            dtgJogadores.Columns["MinhaVez"].Visible = false;
 
             dtgJogadores.Refresh();
         }
@@ -260,6 +271,67 @@ namespace Cartagena
         private void tmrViewJogadores_Tick(object sender, EventArgs e)
         {
             preencherDataGridJogadoresView();
+        }
+
+        private void tmrVez_Tick(object sender, EventArgs e)
+        {
+            if(btnIniciarPartida.Visible == false)
+            {
+                Jogador jVez = new Jogador();
+                jVez = this.game.verificaVez(this.jogadores, this.idPartida);
+
+                if (jVez.Equals(this.meuJogador))
+                {
+                    this.meuJogador.MinhaVez = true;
+                    this.meuJogador.QtdJogadas = jVez.QtdJogadas;
+                }
+               
+            }
+           
+        }
+
+        private void btnMoverAtras_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.voltarPirata(this.meuJogador, int.Parse(txtPosicao.Text));
+                enviaMsg("Posição do pirata atualizada!", "check");
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+
+                enviaMsg(e1.Message, "erro");
+            }
+           
+        }
+
+        private void btnMoverFrente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.moverPirata(this.meuJogador, int.Parse(txtPosicao.Text), txtCarta.Text);
+                enviaMsg("Posição do pirata atualizada!", "check");
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
+        }
+
+        private void btnPularVez_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.pularVez(this.meuJogador);
+                enviaMsg("Pulado a vez!", "check");
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
         }
     }
 }
