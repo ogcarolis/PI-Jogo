@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Cartagena
 {
@@ -17,7 +18,7 @@ namespace Cartagena
         List<Carta> cartas;
         List<Elemento> tabuleiro;
 
-        List<PictureBox> picTabuleiro;
+        List<Panel> panelPosTabuleiro;
         List<PictureBox> picCartas;
         List<PictureBox> picPiratas;
 
@@ -41,7 +42,7 @@ namespace Cartagena
                 this.picCartas = new List<PictureBox>();
 
                 this.tabuleiro = new List<Elemento>();
-                this.picTabuleiro = new List<PictureBox>();
+                this.panelPosTabuleiro = new List<Panel>();
                 this.picPiratas = new List<PictureBox>();
                 
                 tmrViewJogadores.Enabled = true;
@@ -103,72 +104,85 @@ namespace Cartagena
                 this.tabuleiro = this.game.exibirTabuleiro(this.partida.Id);
                 this.tabuleiro = atualizarImgPosicoes(this.tabuleiro);
 
-                for (int i = 0; i < this.picTabuleiro.Count; i++)
+                for (int i = 0; i < this.panelPosTabuleiro.Count; i++)
                 {
-                    panelTabuleiro.Controls.Remove(this.picTabuleiro[i]);
+                    panelTabuleiro.Controls.Remove(this.panelPosTabuleiro[i]);
                 }
 
-                this.picTabuleiro.Clear();
-                for (int i = 1; i < this.tabuleiro.Count; i++)
+                this.panelPosTabuleiro.Clear();
+                for (int i = 0; i < this.tabuleiro.Count; i++)
                 {
                     this.tabuleiro[i].X = x;
                     this.tabuleiro[i].Y = y;
 
-                    PictureBox p = new PictureBox();
+                    if (i == 0)
+                    {
+                        this.tabuleiro[i].X = 3;
+                        this.tabuleiro[i].Y = 569;
+                    }
+                    
+                    Panel p = new Panel();
 
-                    p.Location = new System.Drawing.Point(x, y);
+                    p.Location = new System.Drawing.Point(this.tabuleiro[i].X, this.tabuleiro[i].Y);
                     p.Width = this.tabuleiro[i].W;
                     p.Height = this.tabuleiro[i].H;
                     p.BackgroundImage = this.tabuleiro[i].Img;
-                    p.BackgroundImageLayout = ImageLayout.Stretch;
+                    p.BackgroundImageLayout = ImageLayout.Zoom;
 
-                    this.picTabuleiro.Add(p);
+                    this.panelPosTabuleiro.Add(p);
 
-                    if (i < 3)
+                    if(i >= 1)
                     {
-                        x += 89;
-                    }
+                        if (i < 3)
+                        {
+                            x += 89;
+                        }
 
-                    if (i > 3 && i < 9)
-                    {
-                        x -= 89;
-                    }
+                        if (i > 3 && i < 9)
+                        {
+                            x -= 89;
+                        }
 
-                    if (i > 9 && i < 15)
-                    {
-                        x += 89;
-                    }
+                        if (i > 9 && i < 15)
+                        {
+                            x += 89;
+                        }
 
-                    if (i > 15 && i < 21)
-                    {
-                        x -= 89;
-                    }
+                        if (i > 15 && i < 21)
+                        {
+                            x -= 89;
+                        }
 
-                    if (i > 21 && i < 27)
-                    {
-                        x += 89;
-                    }
+                        if (i > 21 && i < 27)
+                        {
+                            x += 89;
+                        }
 
-                    if (i > 27 && i < 33)
-                    {
-                        x -= 89;
-                    }
+                        if (i > 27 && i < 33)
+                        {
+                            x -= 89;
+                        }
 
-                    if (i > 33)
-                    {
-                        x += 89;
-                    }
+                        if (i > 33)
+                        {
+                            x += 89;
+                        }
 
-                    if (i == 3 || i == 9 || i == 15 || i == 21 || i == 27 || i == 33)
-                    {
-                        y -= 93;
-                    }
+                        if (i == 36)
+                        {
+                            y = 0;
+                        }
 
+                        if (i == 3 || i == 9 || i == 15 || i == 21 || i == 27 || i == 33)
+                        {
+                            y -= 93;
+                        }
+                    }
                 }
 
-                for (int i = 0; i < this.picTabuleiro.Count; i++)
+                for (int i = 0; i < this.panelPosTabuleiro.Count; i++)
                 {
-                    panelTabuleiro.Controls.Add(this.picTabuleiro[i]);
+                    panelTabuleiro.Controls.Add(this.panelPosTabuleiro[i]);
                 }
 
                 panelTabuleiro.Refresh();
@@ -186,23 +200,22 @@ namespace Cartagena
                 this.jogadores = atualizarImgPiratas(this.jogadores);
                 this.tabuleiro = this.game.exibirPiratas(this.partida.Id, this.tabuleiro, this.jogadores);
 
-                for (int i = 0; i < this.picPiratas.Count; i++)
-                {
-                    panelTabuleiro.Controls.Remove(this.picPiratas[i]);
-                }
-
                 this.picPiratas.Clear();
+                for (int i = 0; i < this.panelPosTabuleiro.Count; i++)
+                {
+                    this.panelPosTabuleiro[i].Controls.Clear();
+                }
 
                 for(int i = 0; i < this.tabuleiro.Count; i++)
                 {
-                    int x, y;
-                    int x0 = 5, y0 = 570;
+                    int x = 25, y = 0;
+                    int x0 = 3, y0 = 0;
 
                     for (int l = 0; l < this.tabuleiro[i].Piratas.Count; l++)
                     {
                         PictureBox p = new PictureBox();
-                        p.Width = 20;
-                        p.Height = 20;
+                        p.Width = 18;
+                        p.Height = 18;
                         p.BackgroundImageLayout = ImageLayout.Stretch;
                         p.BackgroundImage = this.tabuleiro[i].Piratas[l].Jogador.ImgPirata;
                       
@@ -210,27 +223,24 @@ namespace Cartagena
                         {
                             p.Location = new System.Drawing.Point(x0, y0);
                             x0 += 22;
+
+                            if(l == 12)
+                            {
+                                y0 += 18;
+                            }
                         }
                         else
                         {
-                            x = this.tabuleiro[i].X;
-                            y = this.tabuleiro[i].Y + 5;
-
                             p.Location = new System.Drawing.Point(x, y);
-                            x += 22;
+                            y += 19;
                         }
 
                         this.picPiratas.Add(p);
-                   }
+                        panelPosTabuleiro[i].Controls.Add(p);
+                    }
                     
                 }
 
-                for (int i = 0; i < this.picPiratas.Count; i++)
-                {
-                    panelTabuleiro.Controls.Add(this.picPiratas[i]);
-                }
-
-                panelTabuleiro.Refresh();
             }
             catch (Exception e1)
             {
@@ -355,22 +365,22 @@ namespace Cartagena
             {
                 if (jo.Cor.Equals("Vermelho"))
                 {
-                    jo.ImgPirata = Properties.Resources.vermelho;
+                    jo.ImgPirata = Cartagena.Properties.Resources.vermelho;
                 }
 
                 if (jo.Cor.Equals("Azul"))
                 {
-                    jo.ImgPirata = Properties.Resources.azul;
+                    jo.ImgPirata = Cartagena.Properties.Resources.azul;
                 }
 
                 if (jo.Cor.Equals("Laranja"))
                 {
-                    jo.ImgPirata = Properties.Resources.laranja;
+                    jo.ImgPirata = Cartagena.Properties.Resources.laranja;
                 }
 
                 if (jo.Cor.Equals("Verde"))
                 {
-                    jo.ImgPirata = Properties.Resources.verde;
+                    jo.ImgPirata = Cartagena.Properties.Resources.verde;
                 }
 
                 if (jo.Cor.Equals("Marrom"))
@@ -387,46 +397,50 @@ namespace Cartagena
         {
             foreach (Elemento t in l)
             {
+                t.W = 53;
+                t.H = 53;
+
+                if (t.Posicao == 0)
+                {
+                    t.W = 259;
+                    t.H = 88;
+                }
+
+                if (t.Posicao == 37)
+                {
+                    t.W = 255;
+                    t.H = 95;
+                    t.Img = Cartagena.Properties.Resources.barco;
+                }
+
                 if (t.Simbolo == "P")
                 {
                     t.Img = Cartagena.Properties.Resources.pistola;
-                    t.W = 46;
-                    t.H = 46;
                 }
 
                 if (t.Simbolo == "E")
                 {
                     t.Img = Cartagena.Properties.Resources.esqueleto;
-                    t.W = 56;
-                    t.H = 46;
                 }
 
                 if (t.Simbolo == "C")
                 {
                     t.Img = Cartagena.Properties.Resources.chave;
-                    t.W = 46;
-                    t.H = 46;
                 }
 
                 if (t.Simbolo == "F")
                 {
                     t.Img = Cartagena.Properties.Resources.faca;
-                    t.W = 46;
-                    t.H = 46;
                 }
 
                 if (t.Simbolo == "G")
                 {
                     t.Img = Cartagena.Properties.Resources.garrafa;
-                    t.W = 42;
-                    t.H = 46;
                 }
 
                 if (t.Simbolo == "T")
                 {
                     t.Img = Cartagena.Properties.Resources.tricornio;
-                    t.W = 56;
-                    t.H = 46;
                 }
             }
 
