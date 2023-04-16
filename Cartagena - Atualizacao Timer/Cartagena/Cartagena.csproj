@@ -50,6 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="class\Pirata.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="view\CadastrarPartidaView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,10 +62,10 @@
       <DependentUpon>CadastrarPartidaView.cs</DependentUpon>
     </Compile>
     <Compile Include="class\Carta.cs" />
-    <Compile Include="class\Game.cs" />
+    <Compile Include="game\Game.cs" />
     <Compile Include="class\Jogador.cs" />
     <Compile Include="class\Partida.cs" />
-    <Compile Include="class\Tabuleiro.cs" />
+    <Compile Include="class\Elemento.cs" />
     <Compile Include="InicioView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,14 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -178,6 +178,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\icon_erro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\laranja.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\marrom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\verde.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\vermelho.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\azul.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

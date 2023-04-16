@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace Cartagena {
     public class Pirata {
+        Jogador jogador;
         int posicao;
-        Image img;
+
+        public Jogador Jogador
+        {
+            get { return jogador; }
+            set { jogador = value; }
+        }
 
         public int Posicao
         {
@@ -16,10 +22,5 @@ namespace Cartagena {
             set { posicao = value; }
         }
 
-        public Image Img
-        {
-            get { return img; }
-            set { img = value; }
-        }
     }
 }

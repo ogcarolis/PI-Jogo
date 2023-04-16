@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,13 +8,18 @@ using System.Threading.Tasks;
 namespace Cartagena {
     public class Jogador {
         int id;
+        int jogadas;
         string nome;
         string senha;
         string cor;
-        bool minhaVez;
-        int qtdJogadas;
+        string status;
+        Image imgPirata;
 
-        List<Pirata> piratas;
+        public Image ImgPirata
+        {
+            get { return imgPirata; }
+            set { imgPirata = value; }
+        }
 
         public int Id
         {
@@ -39,22 +45,18 @@ namespace Cartagena {
             set { cor = value; }
         }
 
-        public bool MinhaVez
+        public string Status
         {
-            get { return minhaVez; }
-            set { minhaVez = value; }
+            get { return status; }
+            set { status = value; }
         }
 
-        public int QtdJogadas
+        public int Jogadas
         {
-            get { return qtdJogadas; }
-            set { qtdJogadas = value; }
+            get { return jogadas; }
+            set { jogadas = value; }
         }
 
-        public List<Pirata> Piratas
-        {
-            get { return piratas; }
-            set { piratas = value; }
-        }
+
     }
 }

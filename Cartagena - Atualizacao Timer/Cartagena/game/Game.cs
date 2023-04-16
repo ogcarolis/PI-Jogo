@@ -14,7 +14,7 @@ namespace Cartagena{
         {
             string retorno = Jogo.CriarPartida(nome, senha);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -26,7 +26,7 @@ namespace Cartagena{
         {
             string retorno = Jogo.EntrarPartida(id, nome, senha);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -46,7 +46,7 @@ namespace Cartagena{
         {
            string retorno = Jogo.IniciarPartida(j.Id, j.Senha);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -59,7 +59,7 @@ namespace Cartagena{
             List<Carta> cartas = new List<Carta>();
             string retorno = Jogo.ConsultarMao(j.Id, j.Senha);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -86,7 +86,7 @@ namespace Cartagena{
             Jogador jVez = new Jogador();
             string retorno = Jogo.VerificarVez(id);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -100,8 +100,7 @@ namespace Cartagena{
             {
                 if (j.Id == int.Parse(jogador[1]))
                 {
-                    j.MinhaVez = true;
-                    j.QtdJogadas = int.Parse(jogador[2]);
+                    j.Jogadas = int.Parse(jogador[2]);
                     jVez = j;
                 }
             }
@@ -113,7 +112,7 @@ namespace Cartagena{
         {
             string retorno = Jogo.Jogar(j.Id, j.Senha, posicao, simbolo);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -123,7 +122,7 @@ namespace Cartagena{
         {
             string retorno = Jogo.Jogar(j.Id, j.Senha, posicao);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -133,7 +132,7 @@ namespace Cartagena{
         {
             string retorno = Jogo.Jogar(j.Id, j.Senha);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -144,7 +143,8 @@ namespace Cartagena{
             List<Partida> partidas = new List<Partida>();
             string retorno = Jogo.ListarPartidas(status);
 
-            if (retorno.Contains("ERRO")) {
+            if (retorno.StartsWith("ERRO"))
+            {
                 throw new Exception(retorno.Substring(5));
             }
 
@@ -172,7 +172,7 @@ namespace Cartagena{
             List<Jogador> jogadores = new List<Jogador>();
             string retorno = Jogo.ListarJogadores(id);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -194,12 +194,12 @@ namespace Cartagena{
             return jogadores;
         }
 
-        public List<Tabuleiro> exibirTabuleiro(int id)
+        public List<Elemento> exibirTabuleiro(int id)
         {
-            List<Tabuleiro> pTabuleiro = new List<Tabuleiro>();
+            List<Elemento> pTabuleiro = new List<Elemento>();
             string retorno = Jogo.ExibirTabuleiro(id);
 
-            if (retorno.Contains("ERRO"))
+            if (retorno.StartsWith("ERRO"))
             {
                 throw new Exception(retorno.Substring(5));
             }
@@ -211,13 +211,53 @@ namespace Cartagena{
             {
                 string[] infoPosicao = posicao[i].Split(',');
 
-                Tabuleiro t = new Tabuleiro();
-                t.Posicao = infoPosicao[0];
+                Elemento t = new Elemento();
+                t.Posicao = int.Parse(infoPosicao[0]);
                 t.Simbolo = infoPosicao[1];
                 pTabuleiro.Add(t);
             }
 
             return pTabuleiro;
-        }        
+        }
+        
+        public List<Elemento> exibirPiratas(int id, List<Elemento> tabuleiro, List<Jogador> jogadores) 
+        {
+            string retorno = Jogo.VerificarVez(id);
+
+            if (retorno.StartsWith("ERRO"))
+            {
+                throw new Exception(retorno.Substring(5));
+            }
+
+            retorno = retorno.Replace("\r", "");
+            string[] info = retorno.Split('\n');
+            
+            foreach (Elemento e in tabuleiro) {
+                e.Piratas.Clear();
+            }
+
+            for (int i = 1; i < info.Length - 1; i++)
+            {
+                string[] infoPirata = info[i].Split(',');
+
+                for(int l = 0; l < int.Parse(infoPirata[2]); l++)
+                {
+                    Pirata p = new Pirata();
+                    p.Posicao = int.Parse(infoPirata[0]);
+
+                    foreach (Jogador j in jogadores)
+                    {
+                        if (j.Id == int.Parse(infoPirata[1]))
+                        {
+                            p.Jogador = j;
+                        }
+                    }
+
+                    tabuleiro[p.Posicao].Piratas.Add(p);
+                }
+            }
+
+            return tabuleiro;
+        }
     }
 }

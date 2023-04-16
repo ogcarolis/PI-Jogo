@@ -8,7 +8,6 @@ namespace Cartagena {
     public class Partida {
         int id;
         string nome;
-        string senha;
         string status;
         string dtCriacao;
 
@@ -20,11 +19,6 @@ namespace Cartagena {
         public string Nome {
             get { return nome; }
             set { nome = value; }
-        }
-
-        public string Senha {
-            get { return senha; }
-            set { senha = value; }
         }
 
         public string Status {
