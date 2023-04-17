@@ -118,6 +118,7 @@ namespace Cartagena
             dtgPartidas.Columns["Nome"].Width = 185;
 
             dtgPartidas.Columns["Status"].Visible = false;
+            dtgPartidas.Columns["Iniciou"].Visible = false;
             dtgPartidas.Columns["DtCriacao"].Visible = false;
 
             dtgPartidas.Refresh();

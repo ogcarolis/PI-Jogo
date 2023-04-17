@@ -88,7 +88,7 @@ namespace Cartagena{
 
             if (retorno.StartsWith("ERRO"))
             {
-                throw new Exception(retorno.Substring(5));
+                return null;
             }
 
             retorno = retorno.Replace("\r", "");
@@ -101,6 +101,7 @@ namespace Cartagena{
                 if (j.Id == int.Parse(jogador[1]))
                 {
                     j.Jogadas = int.Parse(jogador[2]);
+                    j.Status = "Sua Vez";
                     jVez = j;
                 }
             }
@@ -188,6 +189,7 @@ namespace Cartagena{
                 j.Id = int.Parse(infojogadores[0]);
                 j.Nome = infojogadores[1];
                 j.Cor = infojogadores[2];
+                j.Status = "Aguardando Partida";
                 jogadores.Add(j);
             }
 

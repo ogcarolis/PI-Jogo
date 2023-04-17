@@ -33,6 +33,7 @@ namespace Cartagena
                 InitializeComponent();
 
                 this.partida = p;
+                lblNomePartida.Text = "Partida: " + p.Nome;
                 this.jogadores = new List<Jogador>();
                 
                 this.meuJogador = j;
@@ -79,15 +80,15 @@ namespace Cartagena
         private void preencherDataGridJogadoresView()
         {
             this.jogadores = this.game.exibirJogadores(this.partida.Id);
-
+            
             dtgJogadores.Columns.Clear();
-            dtgJogadores.DataSource = jogadores;
+            dtgJogadores.DataSource = this.jogadores;
 
             dtgJogadores.Columns["Id"].Width = 63;
-            dtgJogadores.Columns["Nome"].Width = 110;
+            dtgJogadores.Columns["Nome"].Width = 91;
             dtgJogadores.Columns["Cor"].Width = 110;
-            dtgJogadores.Columns["Status"].Width = 88;
-            dtgJogadores.Columns["Jogadas"].Width = 88;
+            dtgJogadores.Columns["Status"].Width = 140;
+            dtgJogadores.Columns["Jogadas"].Width = 77;
 
             dtgJogadores.Columns["ImgPirata"].Visible = false;
             dtgJogadores.Columns["Senha"].Visible = false;
@@ -209,7 +210,7 @@ namespace Cartagena
                 for(int i = 0; i < this.tabuleiro.Count; i++)
                 {
                     int x = 25, y = 0;
-                    int x0 = 3, y0 = 0;
+                    int x0 = 8, y0 = 8;
 
                     for (int l = 0; l < this.tabuleiro[i].Piratas.Count; l++)
                     {
@@ -297,22 +298,47 @@ namespace Cartagena
 
         private void tmrViewJogadores_Tick(object sender, EventArgs e)
         {
-            preencherDataGridJogadoresView();
+            if (!this.partida.Iniciou)
+            {
+                preencherDataGridJogadoresView();
+            }
         }
 
         private void tmrVez_Tick(object sender, EventArgs e)
         {
-            if(btnIniciarPartida.Visible == false)
-            {
-                Jogador jVez = new Jogador();
-                jVez = this.game.verificaVez(this.jogadores, this.partida.Id);
+            Jogador jVez = new Jogador();
+            jVez = this.game.verificaVez(this.jogadores, this.partida.Id);
 
-                if (jVez.Equals(this.meuJogador))
+            if(jVez != null)
+            {
+                this.partida.Iniciou = true;
+                panelJogar.Visible = true;
+                btnIniciarPartida.Visible = false;
+
+                if(this.tabuleiro.Count == 0)
                 {
-                    this.meuJogador.Jogadas = jVez.Jogadas;
+                    exibirTabuleiro();
                 }
+
+                exibirPiratas();
+                exibirCartas();
+
+                foreach (Jogador jogador in this.jogadores)
+                {
+                    if (jogador.Equals(jVez))
+                    {
+                        jogador.Jogadas = jVez.Jogadas;
+                        jogador.Status = jVez.Status;
+                    }
+                    else
+                    {
+                        jogador.Status = "Aguardando Vez";
+                    }
+                }
+
                 preencherDataGridJogadoresView();
             }
+            
         }
 
         private void btnMoverAtras_Click(object sender, EventArgs e)
@@ -320,8 +346,8 @@ namespace Cartagena
             try
             {
                 this.game.voltarPirata(this.meuJogador, int.Parse(txtPosicao.Text));
-                exibirCartas();
                 exibirPiratas();
+                exibirCartas();
             }
             catch (Exception e1)
             {

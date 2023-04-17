@@ -10,6 +10,7 @@ namespace Cartagena {
         string nome;
         string status;
         string dtCriacao;
+        bool iniciou;
 
         public int Id {
             get { return id; }
@@ -30,6 +31,12 @@ namespace Cartagena {
         {
             get { return dtCriacao; }
             set { dtCriacao = value; }
+        }
+
+        public bool Iniciou
+        {
+            get { return iniciou; }
+            set { iniciou = value; }
         }
 
     }
