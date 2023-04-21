@@ -261,5 +261,76 @@ namespace Cartagena{
 
             return tabuleiro;
         }
+
+        public List<string> exibirHistorico(int id, List<Jogador> jogadores)
+        {
+
+            List<string> historico = new List<string>();
+            string retorno = Jogo.ExibirHistorico(id);
+
+            if (retorno.StartsWith("ERRO"))
+            {
+                throw new Exception(retorno.Substring(2));
+            }
+
+            retorno = retorno.Replace("\r", "");
+            string[] infoHistorico = retorno.Split('\n');
+
+            for (int i = 0; i < infoHistorico.Length - 1; i++)
+            {
+                string[] infoJogador = infoHistorico[i].Split(',');
+                string linha = "";
+
+                foreach (Jogador j in jogadores)
+                {
+                    if (j.Id == int.Parse(infoJogador[0]))
+                    {
+                        linha += j.Nome + " na jogada " + infoJogador[1] ;
+                    }
+                }
+
+                switch (infoJogador[2])
+                {
+                    case "P":
+                        linha += " jogou a carta PISTOLA";
+                        break;
+                    case "E":
+                        linha += " jogou a carta ESQUELETO";
+                        break;
+                    case "C":
+                        linha += " jogou a carta CHAVE";
+                        break;
+                    case "F":
+                        linha += " jogou a carta FACA";
+                        break;
+                    case "G":
+                        linha += " jogou a carta GARRAFA";
+                        break;
+                    case "T":
+                        linha += " jogou a carta TRICORNIO";
+                        break;
+                }
+
+                if (infoJogador[2].Equals("") && !infoJogador[3].Equals(""))
+                {
+                    linha += " MOVEU PARA TRÁS O PIRATA NA POSIÇÃO " + infoJogador[3] + " PARA A POSIÇÃO " + infoJogador[4];
+                }
+                else if (!infoJogador[2].Equals("") && !infoJogador[3].Equals(""))
+                {
+                    linha += " MOVEU O PIRATA NA POSIÇÃO " + infoJogador[3] + " PARA A POSIÇÃO " + infoJogador[4];
+                }
+                else if (infoJogador[3].Equals(""))
+                {
+                    linha += " PULOU A VEZ";
+                }
+
+                historico.Add(linha);
+            }
+
+
+            return historico;
+
+
+        }
     }
 }
