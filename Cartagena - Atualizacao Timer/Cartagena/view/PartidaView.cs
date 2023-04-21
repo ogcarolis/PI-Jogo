@@ -72,6 +72,9 @@ namespace Cartagena
 
                 panelJogar.Visible = true;
                 btnIniciarPartida.Visible = false;
+
+                HistoricoView t = new HistoricoView(209, this.game.exibirJogadores(209));
+                t.ShowDialog();
             }
             catch (Exception e1)
             {

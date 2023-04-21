@@ -327,10 +327,7 @@ namespace Cartagena{
                 historico.Add(linha);
             }
 
-
             return historico;
-
-
         }
     }
 }

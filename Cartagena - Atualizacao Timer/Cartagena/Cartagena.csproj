@@ -72,6 +72,12 @@
     <Compile Include="InicioView.Designer.cs">
       <DependentUpon>InicioView.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\HistoricoView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\HistoricoView.Designer.cs">
+      <DependentUpon>HistoricoView.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\MensagensView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InicioView.resx">
       <DependentUpon>InicioView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\HistoricoView.resx">
+      <DependentUpon>HistoricoView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\MensagensView.resx">
       <DependentUpon>MensagensView.cs</DependentUpon>

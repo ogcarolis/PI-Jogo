@@ -83,3 +83,4 @@ C:\Users\flavia.ssruiz\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartag
 C:\Users\flavia.ssruiz\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.csproj.CopyComplete
 C:\Users\flavia.ssruiz\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.exe
 C:\Users\flavia.ssruiz\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.pdb
+C:\Users\aline\source\repos\PI-Jogo\Cartagena - Atualizacao Timer\Cartagena\obj\Debug\Cartagena.view.HistoricoView.resources
