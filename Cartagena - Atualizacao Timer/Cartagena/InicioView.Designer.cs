@@ -47,13 +47,8 @@
             this.lblSenha = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.dtgPartidas = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Partida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCriarPartida = new System.Windows.Forms.Button();
             this.dtgJogadores = new System.Windows.Forms.DataGridView();
-            this.IdJogador = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomeJogador = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CorJogador = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tmrPartida = new System.Windows.Forms.Timer(this.components);
             this.tmrJogador = new System.Windows.Forms.Timer(this.components);
             this.panelEntrar.SuspendLayout();
@@ -166,9 +161,6 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dtgPartidas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dtgPartidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgPartidas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Partida});
             this.dtgPartidas.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(132)))));
@@ -206,20 +198,6 @@
             this.dtgPartidas.Size = new System.Drawing.Size(270, 478);
             this.dtgPartidas.TabIndex = 1;
             this.dtgPartidas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgPartidas_CellContentClick);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 85;
-            // 
-            // Partida
-            // 
-            this.Partida.HeaderText = "Partida";
-            this.Partida.Name = "Partida";
-            this.Partida.ReadOnly = true;
-            this.Partida.Width = 185;
             // 
             // btnCriarPartida
             // 
@@ -260,10 +238,6 @@
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dtgJogadores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dtgJogadores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgJogadores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdJogador,
-            this.NomeJogador,
-            this.CorJogador});
             this.dtgJogadores.Cursor = System.Windows.Forms.Cursors.Arrow;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(132)))));
@@ -301,27 +275,6 @@
             this.dtgJogadores.Size = new System.Drawing.Size(284, 164);
             this.dtgJogadores.TabIndex = 6;
             this.dtgJogadores.Visible = false;
-            // 
-            // IdJogador
-            // 
-            this.IdJogador.HeaderText = "Id";
-            this.IdJogador.Name = "IdJogador";
-            this.IdJogador.ReadOnly = true;
-            this.IdJogador.Width = 63;
-            // 
-            // NomeJogador
-            // 
-            this.NomeJogador.HeaderText = "Nome";
-            this.NomeJogador.Name = "NomeJogador";
-            this.NomeJogador.ReadOnly = true;
-            this.NomeJogador.Width = 110;
-            // 
-            // CorJogador
-            // 
-            this.CorJogador.HeaderText = "Cor";
-            this.CorJogador.Name = "CorJogador";
-            this.CorJogador.ReadOnly = true;
-            this.CorJogador.Width = 110;
             // 
             // tmrPartida
             // 
@@ -368,12 +321,7 @@
         private System.Windows.Forms.Label lblNome;
         private System.Windows.Forms.Button btnCriarPartida;
         private System.Windows.Forms.DataGridView dtgJogadores;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdJogador;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomeJogador;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CorJogador;
         private System.Windows.Forms.Label lblNomePartida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Partida;
         private System.Windows.Forms.Timer tmrPartida;
         private System.Windows.Forms.Timer tmrJogador;
     }

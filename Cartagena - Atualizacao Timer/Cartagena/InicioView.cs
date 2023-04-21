@@ -64,6 +64,7 @@ namespace Cartagena
                     this.partidaSelecionada.Nome = row.Cells["Nome"].Value.ToString();
                     this.partidaSelecionada.Status = row.Cells["Status"].Value.ToString();
                     this.partidaSelecionada.DtCriacao = row.Cells["DtCriacao"].Value.ToString();
+                    this.partidaSelecionada.Iniciou = false;
 
                     lblNomePartida.Text = "Partida Selecionada: " + this.partidaSelecionada.Nome;
 

@@ -22,7 +22,7 @@ namespace Cartagena{
             return retorno;
         }
 
-        public Jogador entrarPartida( int id, string nome, string senha)
+        public Jogador entrarPartida(int id, string nome, string senha)
         {
             string retorno = Jogo.EntrarPartida(id, nome, senha);
 
