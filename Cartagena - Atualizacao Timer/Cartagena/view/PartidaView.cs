@@ -63,6 +63,8 @@ namespace Cartagena
             {
                 string retorno = this.game.iniciarPartida(this.meuJogador);
                 enviaMsg("Partida Iniciada! Jogador: " + this.meuJogador.Nome, "check");
+                
+                this.partida.Iniciou = true;
 
                 exibirTabuleiro();
                 exibirPiratas();
@@ -79,9 +81,11 @@ namespace Cartagena
 
         private void preencherDataGridJogadoresView()
         {
-            this.jogadores = this.game.exibirJogadores(this.partida.Id);
-            
-            dtgJogadores.Columns.Clear();
+            if (!this.partida.Iniciou)
+            {
+                this.jogadores = this.game.exibirJogadores(this.partida.Id);
+            }
+           
             dtgJogadores.DataSource = this.jogadores;
 
             dtgJogadores.Columns["Id"].Width = 63;
@@ -185,8 +189,6 @@ namespace Cartagena
                 {
                     panelTabuleiro.Controls.Add(this.panelPosTabuleiro[i]);
                 }
-
-                panelTabuleiro.Refresh();
             }
             catch (Exception e1)
             {
@@ -298,10 +300,7 @@ namespace Cartagena
 
         private void tmrViewJogadores_Tick(object sender, EventArgs e)
         {
-            if (!this.partida.Iniciou)
-            {
-                preencherDataGridJogadoresView();
-            }
+           preencherDataGridJogadoresView();
         }
 
         private void tmrVez_Tick(object sender, EventArgs e)
@@ -418,7 +417,6 @@ namespace Cartagena
             return j;
         }
         
-
         private List<Elemento> atualizarImgPosicoes(List<Elemento> l)
         {
             foreach (Elemento t in l)
