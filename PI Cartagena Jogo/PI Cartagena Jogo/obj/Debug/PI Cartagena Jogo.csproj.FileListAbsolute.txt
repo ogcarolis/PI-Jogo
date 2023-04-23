@@ -65,3 +65,17 @@ C:\Users\Pedro Akira\Downloads\PI-Jogo-main\Atualizado\Atualizado\PI-Jogo-main\P
 C:\Users\Pedro Akira\Downloads\PI-Jogo-main\Atualizado\Atualizado\PI-Jogo-main\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.exe
 C:\Users\Pedro Akira\Downloads\PI-Jogo-main\Atualizado\Atualizado\PI-Jogo-main\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.pdb
 C:\Users\Pedro Akira\Downloads\PI-Jogo-main\Atualizado\Atualizado\PI-Jogo-main\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI_Cartagena_Jogo.Mapa.resources
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.AssemblyReference.cache
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.SuggestedBindingRedirects.cache
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI_Cartagena_Jogo.Form1.resources
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI_Cartagena_Jogo.Mapa.resources
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI_Cartagena_Jogo.Properties.Resources.resources
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.GenerateResource.cache
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.CoreCompileInputs.cache
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.exe
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.pdb
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\PI Cartagena Jogo.exe.config
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\PI Cartagena Jogo.exe
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\PI Cartagena Jogo.pdb
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\bin\Debug\CartagenaServer.xml
+C:\Users\aline\Source\Repos\PI-Jogo\PI Cartagena Jogo\PI Cartagena Jogo\obj\Debug\PI Cartagena Jogo.csproj.CopyComplete

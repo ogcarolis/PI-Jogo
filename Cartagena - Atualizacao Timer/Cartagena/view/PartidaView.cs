@@ -8,46 +8,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Cartagena
 {
     public partial class PartidaView : Form
     {
-        int idPartida;
-        Jogador meuJogador;
+        List<Jogador> jogadores;
+        List<Carta> cartas;
+        List<Elemento> tabuleiro;
+
+        List<Panel> panelPosTabuleiro;
+        List<PictureBox> picCartas;
+        List<PictureBox> picPiratas;
+
         Game game;
-        public PartidaView(int id, Jogador j)
+        Partida partida;
+        Jogador meuJogador;
+
+        public PartidaView(Partida p, Jogador j)
         {
             try
             {
                 InitializeComponent();
 
-                this.idPartida = id;
-                meuJogador = j;
+                this.partida = p;
+                lblNomePartida.Text = "Partida: " + p.Nome;
+                this.jogadores = new List<Jogador>();
+                
+                this.meuJogador = j;
+                this.cartas = new List<Carta>();
 
-                game = new Game();
+                this.game = new Game();
+                this.picCartas = new List<PictureBox>();
+
+                this.tabuleiro = new List<Elemento>();
+                this.panelPosTabuleiro = new List<Panel>();
+                this.picPiratas = new List<PictureBox>();
+                
                 tmrViewJogadores.Enabled = true;
+                tmrVez.Enabled = true;
+
                 preencherDataGridJogadoresView();
             }
             catch (Exception e)
             {
                 enviaMsg(e.Message, "erro");
-            }
-
-            
-        }
-
-        private void btnAtualizar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                preencherDataGridJogadoresView();
-            }
-            catch (Exception e1)
-            {
-                enviaMsg(e1.Message, "erro");
-            }
-           
+            }            
         }
 
         private void btnIniciarPartida_Click(object sender, EventArgs e)
@@ -56,11 +63,18 @@ namespace Cartagena
             {
                 string retorno = this.game.iniciarPartida(this.meuJogador);
                 enviaMsg("Partida Iniciada! Jogador: " + this.meuJogador.Nome, "check");
+                
+                this.partida.Iniciou = true;
 
                 exibirTabuleiro();
+                exibirPiratas();
                 exibirCartas();
 
+                panelJogar.Visible = true;
                 btnIniciarPartida.Visible = false;
+
+                HistoricoView t = new HistoricoView(209, this.game.exibirJogadores(209));
+                t.ShowDialog();
             }
             catch (Exception e1)
             {
@@ -70,16 +84,20 @@ namespace Cartagena
 
         private void preencherDataGridJogadoresView()
         {
-            List<Jogador> jogadores = new List<Jogador>();
-            jogadores = this.game.exibirJogadores(this.idPartida);
-
-            dtgJogadores.Columns.Clear();
-            dtgJogadores.DataSource = jogadores;
+            if (!this.partida.Iniciou)
+            {
+                this.jogadores = this.game.exibirJogadores(this.partida.Id);
+            }
+           
+            dtgJogadores.DataSource = this.jogadores;
 
             dtgJogadores.Columns["Id"].Width = 63;
-            dtgJogadores.Columns["Nome"].Width = 110;
+            dtgJogadores.Columns["Nome"].Width = 91;
             dtgJogadores.Columns["Cor"].Width = 110;
+            dtgJogadores.Columns["Status"].Width = 140;
+            dtgJogadores.Columns["Jogadas"].Width = 77;
 
+            dtgJogadores.Columns["ImgPirata"].Visible = false;
             dtgJogadores.Columns["Senha"].Visible = false;
 
             dtgJogadores.Refresh();
@@ -89,71 +107,151 @@ namespace Cartagena
         {
             try
             {
-                int w = 287, h = 586;
+                int x = 287, y = 586;
 
-                List<Tabuleiro> pTabuleiro = new List<Tabuleiro>();
-                pTabuleiro = this.game.exibirTabuleiro(this.idPartida);
+                this.tabuleiro = this.game.exibirTabuleiro(this.partida.Id);
+                this.tabuleiro = atualizarImgPosicoes(this.tabuleiro);
 
-                pTabuleiro = atualizarImgPosicoes(pTabuleiro);
-
-                for (int i = 1; i < pTabuleiro.Count; i++)
+                for (int i = 0; i < this.panelPosTabuleiro.Count; i++)
                 {
-                    PictureBox p = new PictureBox();
-                    panelTabuleiro.Controls.Add(p);
+                    panelTabuleiro.Controls.Remove(this.panelPosTabuleiro[i]);
+                }
 
-                    p.Location = new System.Drawing.Point(w, h);
-                    p.Width = 53;
-                    p.Height = 53;
+                this.panelPosTabuleiro.Clear();
+                for (int i = 0; i < this.tabuleiro.Count; i++)
+                {
+                    this.tabuleiro[i].X = x;
+                    this.tabuleiro[i].Y = y;
 
-                    p.BackgroundImage = pTabuleiro[i].Img;
-                    p.BackgroundImageLayout = ImageLayout.Stretch;
-
-                    if (i < 3)
+                    if (i == 0)
                     {
-                        w += 89;
+                        this.tabuleiro[i].X = 3;
+                        this.tabuleiro[i].Y = 569;
                     }
+                    
+                    Panel p = new Panel();
 
-                    if (i > 3 && i <= 9)
+                    p.Location = new System.Drawing.Point(this.tabuleiro[i].X, this.tabuleiro[i].Y);
+                    p.Width = this.tabuleiro[i].W;
+                    p.Height = this.tabuleiro[i].H;
+                    p.BackgroundImage = this.tabuleiro[i].Img;
+                    p.BackgroundImageLayout = ImageLayout.Zoom;
+
+                    this.panelPosTabuleiro.Add(p);
+
+                    if(i >= 1)
                     {
-                        w -= 89;
-                    }
+                        if (i < 3)
+                        {
+                            x += 89;
+                        }
 
-                    if (i > 9 && i <= 15)
-                    {
-                        w += 89;
-                    }
+                        if (i > 3 && i < 9)
+                        {
+                            x -= 89;
+                        }
 
-                    if (i > 16 && i <= 21)
-                    {
-                        w -= 89;
-                    }
+                        if (i > 9 && i < 15)
+                        {
+                            x += 89;
+                        }
 
-                    if (i > 22 && i <= 27)
-                    {
-                        w += 89;
-                    }
+                        if (i > 15 && i < 21)
+                        {
+                            x -= 89;
+                        }
 
-                    if (i > 28 && i <= 33)
-                    {
-                        w -= 89;
-                    }
+                        if (i > 21 && i < 27)
+                        {
+                            x += 89;
+                        }
 
-                    if (i > 33)
-                    {
-                        w += 89;
-                    }
+                        if (i > 27 && i < 33)
+                        {
+                            x -= 89;
+                        }
 
-                    if (i == 3 || i == 10 || i == 15 || i == 22 || i == 28 || i == 33)
-                    {
-                        h -= 93;
-                    }
+                        if (i > 33)
+                        {
+                            x += 89;
+                        }
 
+                        if (i == 36)
+                        {
+                            y = 0;
+                        }
+
+                        if (i == 3 || i == 9 || i == 15 || i == 21 || i == 27 || i == 33)
+                        {
+                            y -= 93;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < this.panelPosTabuleiro.Count; i++)
+                {
+                    panelTabuleiro.Controls.Add(this.panelPosTabuleiro[i]);
                 }
             }
             catch (Exception e1)
             {
                 enviaMsg(e1.Message, "erro");
-            }      
+            }
+        }
+
+        private void exibirPiratas()
+        {
+            try
+            {
+                this.jogadores = atualizarImgPiratas(this.jogadores);
+                this.tabuleiro = this.game.exibirPiratas(this.partida.Id, this.tabuleiro, this.jogadores);
+
+                this.picPiratas.Clear();
+                for (int i = 0; i < this.panelPosTabuleiro.Count; i++)
+                {
+                    this.panelPosTabuleiro[i].Controls.Clear();
+                }
+
+                for(int i = 0; i < this.tabuleiro.Count; i++)
+                {
+                    int x = 25, y = 0;
+                    int x0 = 8, y0 = 8;
+
+                    for (int l = 0; l < this.tabuleiro[i].Piratas.Count; l++)
+                    {
+                        PictureBox p = new PictureBox();
+                        p.Width = 18;
+                        p.Height = 18;
+                        p.BackgroundImageLayout = ImageLayout.Stretch;
+                        p.BackgroundImage = this.tabuleiro[i].Piratas[l].Jogador.ImgPirata;
+                      
+                        if (i == 0)
+                        {
+                            p.Location = new System.Drawing.Point(x0, y0);
+                            x0 += 22;
+
+                            if(l == 12)
+                            {
+                                y0 += 18;
+                            }
+                        }
+                        else
+                        {
+                            p.Location = new System.Drawing.Point(x, y);
+                            y += 19;
+                        }
+
+                        this.picPiratas.Add(p);
+                        panelPosTabuleiro[i].Controls.Add(p);
+                    }
+                    
+                }
+
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
         }
 
         private void exibirCartas()
@@ -161,25 +259,34 @@ namespace Cartagena
             try
             {
                 panelCartas.Visible = true;
-                int w = 4, h = 39;
+                int x = 4, y = 39;
 
-                List<Carta> cartas = new List<Carta>();
-                cartas = this.game.consultarMao(this.meuJogador);
-                cartas = atualizarImgCartas(cartas);
+                this.cartas = this.game.consultarMao(this.meuJogador);
+                this.cartas = atualizarImgCartas(this.cartas);
 
-                for (int i = 0; i < cartas.Count; i++)
+                for (int i = 0; i < this.picCartas.Count; i++)
+                {
+                    panelCartas.Controls.Remove(this.picCartas[i]);
+                }
+
+                this.picCartas.Clear();
+                for (int i = 0; i < this.cartas.Count; i++)
                 {
                     PictureBox p = new PictureBox();
-                    panelCartas.Controls.Add(p);
 
-                    p.Location = new System.Drawing.Point(w, h);
+                    p.Location = new System.Drawing.Point(x, y);
                     p.Width = 79;
                     p.Height = 121;
-
-                    p.BackgroundImage = cartas[i].Img;
+                    p.BackgroundImage = this.cartas[i].Img;
                     p.BackgroundImageLayout = ImageLayout.Stretch;
 
-                    w += 40;
+                    this.picCartas.Add(p);
+                    x += 40;
+                }
+
+                for (int i = 0; i < this.picCartas.Count; i++)
+                {
+                    panelCartas.Controls.Add(this.picCartas[i]);
                 }
             }
             catch (Exception e1)
@@ -188,10 +295,151 @@ namespace Cartagena
             } 
         }
 
-        private List<Tabuleiro> atualizarImgPosicoes(List<Tabuleiro> l)
+        private void enviaMsg(String msg, String tipo)
         {
-            foreach (Tabuleiro t in l)
+            MensagensView message = new MensagensView(msg, tipo);
+            message.ShowDialog();
+        }
+
+        private void tmrViewJogadores_Tick(object sender, EventArgs e)
+        {
+           preencherDataGridJogadoresView();
+        }
+
+        private void tmrVez_Tick(object sender, EventArgs e)
+        {
+            Jogador jVez = new Jogador();
+            jVez = this.game.verificaVez(this.jogadores, this.partida.Id);
+
+            if(jVez != null)
             {
+                this.partida.Iniciou = true;
+                panelJogar.Visible = true;
+                btnIniciarPartida.Visible = false;
+
+                if(this.tabuleiro.Count == 0)
+                {
+                    exibirTabuleiro();
+                }
+
+                exibirPiratas();
+                exibirCartas();
+
+                foreach (Jogador jogador in this.jogadores)
+                {
+                    if (jogador.Equals(jVez))
+                    {
+                        jogador.Jogadas = jVez.Jogadas;
+                        jogador.Status = jVez.Status;
+                    }
+                    else
+                    {
+                        jogador.Status = "Aguardando Vez";
+                    }
+                }
+
+                preencherDataGridJogadoresView();
+            }
+            
+        }
+
+        private void btnMoverAtras_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.voltarPirata(this.meuJogador, int.Parse(txtPosicao.Text));
+                exibirPiratas();
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+
+                enviaMsg(e1.Message, "erro");
+            }
+           
+        }
+
+        private void btnMoverFrente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.moverPirata(this.meuJogador, int.Parse(txtPosicao.Text), txtCarta.Text);
+                exibirPiratas();
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
+        }
+
+        private void btnPularVez_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.pularVez(this.meuJogador);
+                exibirPiratas();
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
+        }
+
+        private List<Jogador> atualizarImgPiratas(List<Jogador> j)
+        {
+            foreach (Jogador jo in j)
+            {
+                if (jo.Cor.Equals("Vermelho"))
+                {
+                    jo.ImgPirata = Cartagena.Properties.Resources.vermelho;
+                }
+
+                if (jo.Cor.Equals("Azul"))
+                {
+                    jo.ImgPirata = Cartagena.Properties.Resources.azul;
+                }
+
+                if (jo.Cor.Equals("Laranja"))
+                {
+                    jo.ImgPirata = Cartagena.Properties.Resources.laranja;
+                }
+
+                if (jo.Cor.Equals("Verde"))
+                {
+                    jo.ImgPirata = Cartagena.Properties.Resources.verde;
+                }
+
+                if (jo.Cor.Equals("Marrom"))
+                {
+                    jo.ImgPirata = Properties.Resources.marrom;
+                }
+            }
+
+            return j;
+        }
+        
+        private List<Elemento> atualizarImgPosicoes(List<Elemento> l)
+        {
+            foreach (Elemento t in l)
+            {
+                t.W = 53;
+                t.H = 53;
+
+                if (t.Posicao == 0)
+                {
+                    t.W = 259;
+                    t.H = 88;
+                }
+
+                if (t.Posicao == 37)
+                {
+                    t.W = 255;
+                    t.H = 95;
+                    t.Img = Cartagena.Properties.Resources.barco;
+                }
+
                 if (t.Simbolo == "P")
                 {
                     t.Img = Cartagena.Properties.Resources.pistola;
@@ -262,17 +510,6 @@ namespace Cartagena
             }
 
             return c;
-        }
-
-        private void enviaMsg(String msg, String tipo)
-        {
-            MensagensView message = new MensagensView(msg, tipo);
-            message.ShowDialog();
-        }
-
-        private void tmrViewJogadores_Tick(object sender, EventArgs e)
-        {
-            preencherDataGridJogadoresView();
         }
     }
 }

@@ -15,16 +15,20 @@ namespace Cartagena
     {
         Game game;
         Jogador meuJogador;
-        int idPartida;
+        Partida partidaSelecionada;
         public InicioView()
         {
             InitializeComponent();
 
             try
             {
-                game = new Game();
-                meuJogador = new Jogador();
+                this.game = new Game();
+                this.meuJogador = new Jogador();
+                this.partidaSelecionada = new Partida();
+
+                tmrJogador.Enabled = true;
                 tmrPartida.Enabled = true;
+
                 preencherDataGridView();
             }
             catch (Exception e)
@@ -56,11 +60,16 @@ namespace Cartagena
                 {
                     DataGridViewRow row = this.dtgPartidas.Rows[e.RowIndex];
 
-                    this.idPartida = int.Parse(row.Cells["Id"].Value.ToString());
-                    lblNomePartida.Text = "Partida Selecionada: " + row.Cells["Nome"].Value.ToString();
-                    panelEntrar.Visible = true;
+                    this.partidaSelecionada.Id = int.Parse(row.Cells["Id"].Value.ToString());
+                    this.partidaSelecionada.Nome = row.Cells["Nome"].Value.ToString();
+                    this.partidaSelecionada.Status = row.Cells["Status"].Value.ToString();
+                    this.partidaSelecionada.DtCriacao = row.Cells["DtCriacao"].Value.ToString();
+                    this.partidaSelecionada.Iniciou = false;
 
-                    tmrJogador.Enabled = true;                    
+                    lblNomePartida.Text = "Partida Selecionada: " + this.partidaSelecionada.Nome;
+
+                    preencherDataGridJogadoresView();
+                    panelEntrar.Visible = true;             
                 }
             }
             catch (Exception e1)
@@ -74,11 +83,11 @@ namespace Cartagena
         {
             try
             {
-                this.meuJogador = this.game.entrarPartida(this.idPartida, txtNome.Text, txtSenha.Text);
+                this.meuJogador = this.game.entrarPartida(this.partidaSelecionada.Id, txtNome.Text, txtSenha.Text);
                 enviaMsg(this.meuJogador.Nome + " entrou na partida!", "check");
-                limparDados();
+                limparDados(); 
 
-                PartidaView p = new PartidaView(this.idPartida, this.meuJogador);
+                PartidaView p = new PartidaView(this.partidaSelecionada, this.meuJogador);
                 p.ShowDialog();
             }
             catch (Exception e1)
@@ -109,8 +118,8 @@ namespace Cartagena
             dtgPartidas.Columns["Id"].Width = 85;
             dtgPartidas.Columns["Nome"].Width = 185;
 
-            dtgPartidas.Columns["Senha"].Visible = false;
             dtgPartidas.Columns["Status"].Visible = false;
+            dtgPartidas.Columns["Iniciou"].Visible = false;
             dtgPartidas.Columns["DtCriacao"].Visible = false;
 
             dtgPartidas.Refresh();
@@ -119,7 +128,7 @@ namespace Cartagena
         private void preencherDataGridJogadoresView()
         {
             List<Jogador> jogadores = new List<Jogador>();
-            jogadores = this.game.exibirJogadores(this.idPartida);
+            jogadores = this.game.exibirJogadores(this.partidaSelecionada.Id);
 
             dtgJogadores.Visible = true;
             dtgJogadores.Columns.Clear();
@@ -130,7 +139,10 @@ namespace Cartagena
             dtgJogadores.Columns["Cor"].Width = 110;
 
             dtgJogadores.Columns["Senha"].Visible = false;
-          
+            dtgJogadores.Columns["Status"].Visible = false;
+            dtgJogadores.Columns["Jogadas"].Visible = false;
+            dtgJogadores.Columns["ImgPirata"].Visible = false;
+
             dtgJogadores.Refresh();
 
         }
@@ -148,7 +160,9 @@ namespace Cartagena
 
         private void tmrJogador_Tick(object sender, EventArgs e)
         {
-            preencherDataGridJogadoresView();
+            if(this.partidaSelecionada != null && dtgJogadores.Visible == true) {
+                preencherDataGridJogadoresView();
+            }
         }
     }
 }
