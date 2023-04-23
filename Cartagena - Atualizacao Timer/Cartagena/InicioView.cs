@@ -115,7 +115,6 @@ namespace Cartagena
 
             dtgPartidas.Columns.Clear();
             dtgPartidas.DataSource = partidas;
-            dtgPartidas.ClearSelection();
 
             dtgPartidas.Columns["Id"].Width = 85;
             dtgPartidas.Columns["Nome"].Width = 185;
@@ -135,8 +134,7 @@ namespace Cartagena
             dtgJogadores.Visible = true;
             dtgJogadores.Columns.Clear();
             dtgJogadores.DataSource = jogadores;
-            dtgJogadores.ClearSelection();
-
+         
             dtgJogadores.Columns["Id"].Width = 63;
             dtgJogadores.Columns["Nome"].Width = 110;
             dtgJogadores.Columns["Cor"].Width = 110;
@@ -167,11 +165,6 @@ namespace Cartagena
             if(this.partidaSelecionada != null && dtgJogadores.Visible == true) {
                 preencherDataGridJogadoresView();
             }
-        }
-
-        private void InicioView_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Close();
         }
     }
 }
