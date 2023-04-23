@@ -63,6 +63,16 @@ namespace Cartagena.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap amarelo {
+            get {
+                object obj = ResourceManager.GetObject("amarelo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap azul {
             get {
                 object obj = ResourceManager.GetObject("azul", resourceCulture);
@@ -256,16 +266,6 @@ namespace Cartagena.Properties {
         internal static System.Drawing.Bitmap icon_erro {
             get {
                 object obj = ResourceManager.GetObject("icon_erro", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap laranja {
-            get {
-                object obj = ResourceManager.GetObject("laranja", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

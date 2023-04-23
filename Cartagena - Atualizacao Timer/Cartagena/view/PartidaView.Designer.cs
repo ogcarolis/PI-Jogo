@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PartidaView));
             this.dtgJogadores = new System.Windows.Forms.DataGridView();
             this.panelTabuleiro = new System.Windows.Forms.Panel();
             this.btnIniciarPartida = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.lblPosicao = new System.Windows.Forms.Label();
             this.tmrVez = new System.Windows.Forms.Timer(this.components);
             this.lblNomePartida = new System.Windows.Forms.Label();
+            this.btnVoltar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).BeginInit();
             this.panelCartas.SuspendLayout();
             this.panelJogar.SuspendLayout();
@@ -91,7 +93,7 @@
             this.dtgJogadores.DefaultCellStyle = dataGridViewCellStyle3;
             this.dtgJogadores.EnableHeadersVisualStyles = false;
             this.dtgJogadores.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(132)))));
-            this.dtgJogadores.Location = new System.Drawing.Point(561, 43);
+            this.dtgJogadores.Location = new System.Drawing.Point(561, 47);
             this.dtgJogadores.MultiSelect = false;
             this.dtgJogadores.Name = "dtgJogadores";
             this.dtgJogadores.ReadOnly = true;
@@ -146,9 +148,9 @@
             this.panelCartas.AutoScroll = true;
             this.panelCartas.BackColor = System.Drawing.Color.Transparent;
             this.panelCartas.Controls.Add(this.lbltitulo);
-            this.panelCartas.Location = new System.Drawing.Point(561, 211);
+            this.panelCartas.Location = new System.Drawing.Point(561, 212);
             this.panelCartas.Name = "panelCartas";
-            this.panelCartas.Size = new System.Drawing.Size(463, 183);
+            this.panelCartas.Size = new System.Drawing.Size(481, 183);
             this.panelCartas.TabIndex = 11;
             this.panelCartas.Visible = false;
             // 
@@ -207,11 +209,10 @@
             this.panelJogar.Controls.Add(this.lblPosicao);
             this.panelJogar.Controls.Add(this.btnMoverAtras);
             this.panelJogar.Controls.Add(this.btnMoverFrente);
-            this.panelJogar.Location = new System.Drawing.Point(561, 448);
+            this.panelJogar.Location = new System.Drawing.Point(565, 416);
             this.panelJogar.Name = "panelJogar";
-            this.panelJogar.Size = new System.Drawing.Size(463, 192);
+            this.panelJogar.Size = new System.Drawing.Size(473, 183);
             this.panelJogar.TabIndex = 14;
-            this.panelJogar.Visible = false;
             // 
             // txtCarta
             // 
@@ -278,20 +279,34 @@
             this.lblNomePartida.BackColor = System.Drawing.Color.Transparent;
             this.lblNomePartida.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNomePartida.ForeColor = System.Drawing.Color.White;
-            this.lblNomePartida.Location = new System.Drawing.Point(560, 10);
+            this.lblNomePartida.Location = new System.Drawing.Point(560, 12);
             this.lblNomePartida.Name = "lblNomePartida";
             this.lblNomePartida.Size = new System.Drawing.Size(94, 27);
             this.lblNomePartida.TabIndex = 17;
             this.lblNomePartida.Text = "Partida: ";
             this.lblNomePartida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnVoltar
+            // 
+            this.btnVoltar.BackColor = System.Drawing.Color.Transparent;
+            this.btnVoltar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVoltar.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVoltar.ForeColor = System.Drawing.Color.White;
+            this.btnVoltar.Location = new System.Drawing.Point(882, 618);
+            this.btnVoltar.Name = "btnVoltar";
+            this.btnVoltar.Size = new System.Drawing.Size(159, 35);
+            this.btnVoltar.TabIndex = 18;
+            this.btnVoltar.Text = "Voltar";
+            this.btnVoltar.UseVisualStyleBackColor = false;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
+            // 
             // PartidaView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo_partida;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1055, 667);
+            this.ClientSize = new System.Drawing.Size(1071, 671);
+            this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.lblNomePartida);
             this.Controls.Add(this.panelJogar);
             this.Controls.Add(this.panelCartas);
@@ -299,9 +314,11 @@
             this.Controls.Add(this.panelTabuleiro);
             this.Controls.Add(this.dtgJogadores);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "PartidaView";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Bogotá";
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).EndInit();
             this.panelCartas.ResumeLayout(false);
@@ -331,5 +348,6 @@
         private System.Windows.Forms.Button btnPularVez;
         private System.Windows.Forms.TextBox txtCarta;
         private System.Windows.Forms.Label lblNomePartida;
+        private System.Windows.Forms.Button btnVoltar;
     }
 }

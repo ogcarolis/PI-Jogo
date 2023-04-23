@@ -33,6 +33,7 @@
             this.txtNomePartida = new System.Windows.Forms.TextBox();
             this.lblSenha = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
+            this.btnVoltar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCriarPartida
@@ -52,7 +53,7 @@
             // txtSenhaPartida
             // 
             this.txtSenhaPartida.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSenhaPartida.Location = new System.Drawing.Point(172, 119);
+            this.txtSenhaPartida.Location = new System.Drawing.Point(172, 108);
             this.txtSenhaPartida.Name = "txtSenhaPartida";
             this.txtSenhaPartida.PasswordChar = '*';
             this.txtSenhaPartida.Size = new System.Drawing.Size(161, 26);
@@ -61,7 +62,7 @@
             // txtNomePartida
             // 
             this.txtNomePartida.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNomePartida.Location = new System.Drawing.Point(172, 75);
+            this.txtNomePartida.Location = new System.Drawing.Point(172, 64);
             this.txtNomePartida.Name = "txtNomePartida";
             this.txtNomePartida.Size = new System.Drawing.Size(161, 26);
             this.txtNomePartida.TabIndex = 2;
@@ -72,7 +73,7 @@
             this.lblSenha.BackColor = System.Drawing.Color.Transparent;
             this.lblSenha.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSenha.ForeColor = System.Drawing.Color.Black;
-            this.lblSenha.Location = new System.Drawing.Point(39, 122);
+            this.lblSenha.Location = new System.Drawing.Point(39, 111);
             this.lblSenha.Name = "lblSenha";
             this.lblSenha.Size = new System.Drawing.Size(126, 23);
             this.lblSenha.TabIndex = 1;
@@ -84,11 +85,25 @@
             this.lblNome.BackColor = System.Drawing.Color.Transparent;
             this.lblNome.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNome.ForeColor = System.Drawing.Color.Black;
-            this.lblNome.Location = new System.Drawing.Point(39, 78);
+            this.lblNome.Location = new System.Drawing.Point(39, 67);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(122, 23);
             this.lblNome.TabIndex = 0;
             this.lblNome.Text = "Nome Partida:";
+            // 
+            // btnVoltar
+            // 
+            this.btnVoltar.BackColor = System.Drawing.Color.Transparent;
+            this.btnVoltar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVoltar.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVoltar.ForeColor = System.Drawing.Color.Black;
+            this.btnVoltar.Location = new System.Drawing.Point(43, 174);
+            this.btnVoltar.Name = "btnVoltar";
+            this.btnVoltar.Size = new System.Drawing.Size(110, 46);
+            this.btnVoltar.TabIndex = 4;
+            this.btnVoltar.Text = "Voltar";
+            this.btnVoltar.UseVisualStyleBackColor = false;
+            this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
             // CadastrarPartidaView
             // 
@@ -97,15 +112,17 @@
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo_map;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(399, 249);
+            this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.lblSenha);
             this.Controls.Add(this.txtSenhaPartida);
             this.Controls.Add(this.lblNome);
             this.Controls.Add(this.btnCriarPartida);
             this.Controls.Add(this.txtNomePartida);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "CadastrarPartidaView";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Criar Partida";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -119,5 +136,6 @@
         private System.Windows.Forms.TextBox txtNomePartida;
         private System.Windows.Forms.Label lblSenha;
         private System.Windows.Forms.Label lblNome;
+        private System.Windows.Forms.Button btnVoltar;
     }
 }

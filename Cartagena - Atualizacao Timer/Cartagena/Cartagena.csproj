@@ -189,9 +189,6 @@
     <None Include="img\icon_erro.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="img\laranja.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="img\marrom.png" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +199,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\azul.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\fundo-historico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\amarelo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\pa.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

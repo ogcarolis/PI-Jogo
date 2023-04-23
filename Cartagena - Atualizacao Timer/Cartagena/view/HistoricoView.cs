@@ -12,33 +12,75 @@ namespace Cartagena.view
 {
     public partial class HistoricoView : Form
     {
-        int idPartida;
         List<Jogador> jogadores;
+        Partida partida;
         Game game;
 
-        public HistoricoView(int id, List<Jogador> jogadores)
+        public HistoricoView(Partida p, List<Jogador> jogadores)
         {
             InitializeComponent();
 
-            this.game = new Game();
-            this.jogadores = new List<Jogador>();
+            this.partida = new Partida();
+            this.partida = p;
 
+            this.game = new Game();
+
+            this.jogadores = new List<Jogador>();
             this.jogadores = jogadores;
-            this.idPartida = id;
             
+            tmrHistorico.Enabled = true;
             exibirHistorico();
         }
 
         private void exibirHistorico()
-        { 
-            lbHistorico.Items.Clear();
-
+        {
             List<string> historico = new List<string>();
-            historico = this.game.exibirHistorico(this.idPartida, this.jogadores);
+            historico = this.game.exibirHistorico(this.partida.Id, this.jogadores);
 
-            foreach(string l in historico)
+            if(historico != null)
             {
-                lbHistorico.Items.Add(l);
+                int x = 3, y = 2;
+                int w = 287, h;
+                panelHistorico.Controls.Clear();
+
+                ScrollBar vScrollBar = new VScrollBar();
+                vScrollBar.Dock = DockStyle.Right;
+                vScrollBar.Scroll += (sender, e) => { panelHistorico.VerticalScroll.Value = vScrollBar.Value; };
+                panelHistorico.Controls.Add(vScrollBar);
+
+                for (int i = 0; i < historico.Count; i++)
+                {
+                    Label l = new Label();
+                    l.Location = new Point(x, y);
+
+                    if (historico[i].Contains("pulou a vez") || historico[i].Contains("iniciou a partida"))
+                    {
+                        h = 19;
+                    }
+                    else
+                    {
+                        h = 32;
+                    }
+
+                    l.Size = new System.Drawing.Size(w, h);
+                    l.BackColor = System.Drawing.Color.Transparent;
+                    l.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+
+                    l.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                    l.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+                    l.Text = historico[i];
+
+                    foreach (Jogador j in this.jogadores)
+                    {
+                        if (historico[i].StartsWith(j.Nome))
+                        {
+                            l.ForeColor = j.ColorPirata;
+                        }
+                    }
+
+                    panelHistorico.Controls.Add(l);
+                    y += h;
+                }
             }
         }
 

@@ -26,6 +26,8 @@ namespace Cartagena
         Partida partida;
         Jogador meuJogador;
 
+        HistoricoView historico;
+
         public PartidaView(Partida p, Jogador j)
         {
             try
@@ -38,10 +40,10 @@ namespace Cartagena
                 
                 this.meuJogador = j;
                 this.cartas = new List<Carta>();
-
-                this.game = new Game();
                 this.picCartas = new List<PictureBox>();
 
+                this.game = new Game();
+               
                 this.tabuleiro = new List<Elemento>();
                 this.panelPosTabuleiro = new List<Panel>();
                 this.picPiratas = new List<PictureBox>();
@@ -69,12 +71,9 @@ namespace Cartagena
                 exibirTabuleiro();
                 exibirPiratas();
                 exibirCartas();
-
-                panelJogar.Visible = true;
+                exibirHistorico();
+               
                 btnIniciarPartida.Visible = false;
-
-                HistoricoView t = new HistoricoView(209, this.game.exibirJogadores(209));
-                t.ShowDialog();
             }
             catch (Exception e1)
             {
@@ -82,25 +81,16 @@ namespace Cartagena
             }
         }
 
-        private void preencherDataGridJogadoresView()
+        private void btnVoltar_Click(object sender, EventArgs e)
         {
-            if (!this.partida.Iniciou)
+            InicioView i = new InicioView();
+            i.Show();
+            this.Hide();
+
+            if(this.historico != null && this.historico.Visible)
             {
-                this.jogadores = this.game.exibirJogadores(this.partida.Id);
+                this.historico.Hide();
             }
-           
-            dtgJogadores.DataSource = this.jogadores;
-
-            dtgJogadores.Columns["Id"].Width = 63;
-            dtgJogadores.Columns["Nome"].Width = 91;
-            dtgJogadores.Columns["Cor"].Width = 110;
-            dtgJogadores.Columns["Status"].Width = 140;
-            dtgJogadores.Columns["Jogadas"].Width = 77;
-
-            dtgJogadores.Columns["ImgPirata"].Visible = false;
-            dtgJogadores.Columns["Senha"].Visible = false;
-
-            dtgJogadores.Refresh();
         }
 
         private void exibirTabuleiro()
@@ -183,7 +173,7 @@ namespace Cartagena
 
                         if (i == 3 || i == 9 || i == 15 || i == 21 || i == 27 || i == 33)
                         {
-                            y -= 93;
+                            y -= 94;
                         }
                     }
                 }
@@ -215,7 +205,7 @@ namespace Cartagena
                 for(int i = 0; i < this.tabuleiro.Count; i++)
                 {
                     int x = 25, y = 0;
-                    int x0 = 8, y0 = 8;
+                    int x0 = 4, y0 = 8;
 
                     for (int l = 0; l < this.tabuleiro[i].Piratas.Count; l++)
                     {
@@ -228,17 +218,18 @@ namespace Cartagena
                         if (i == 0)
                         {
                             p.Location = new System.Drawing.Point(x0, y0);
-                            x0 += 22;
+                            x0 += 20;
 
-                            if(l == 12)
+                            if(l == 11 || l == 23)
                             {
-                                y0 += 18;
+                                x0 = 4;
+                                y0 += 26;
                             }
                         }
                         else
                         {
                             p.Location = new System.Drawing.Point(x, y);
-                            y += 19;
+                            y += 18;
                         }
 
                         this.picPiratas.Add(p);
@@ -267,6 +258,7 @@ namespace Cartagena
                 for (int i = 0; i < this.picCartas.Count; i++)
                 {
                     panelCartas.Controls.Remove(this.picCartas[i]);
+                   
                 }
 
                 this.picCartas.Clear();
@@ -295,10 +287,20 @@ namespace Cartagena
             } 
         }
 
-        private void enviaMsg(String msg, String tipo)
+        private void exibirHistorico()
         {
-            MensagensView message = new MensagensView(msg, tipo);
-            message.ShowDialog();
+            if (this.historico == null)
+            {
+                this.historico = new HistoricoView(this.partida, this.jogadores);
+            }
+
+            if (!this.historico.Visible && this.Visible)
+            {
+                this.historico.Show();
+
+                this.Location = new Point(this.Location.X - 250, this.Location.Y);
+                this.historico.Location = new Point(this.Width + this.Location.X, this.Location.Y);
+            }
         }
 
         private void tmrViewJogadores_Tick(object sender, EventArgs e)
@@ -314,27 +316,32 @@ namespace Cartagena
             if(jVez != null)
             {
                 this.partida.Iniciou = true;
-                panelJogar.Visible = true;
                 btnIniciarPartida.Visible = false;
-
-                if(this.tabuleiro.Count == 0)
+               
+                if (this.tabuleiro.Count == 0)
                 {
                     exibirTabuleiro();
                 }
 
+                exibirHistorico();
                 exibirPiratas();
-                exibirCartas();
+
+                if (panelCartas.Visible == false || jVez.Equals(this.meuJogador))
+                {
+                    exibirCartas();
+                }
 
                 foreach (Jogador jogador in this.jogadores)
                 {
                     if (jogador.Equals(jVez))
                     {
-                        jogador.Jogadas = jVez.Jogadas;
+                        jogador.Jogada = jVez.Jogada;
                         jogador.Status = jVez.Status;
                     }
                     else
                     {
                         jogador.Status = "Aguardando Vez";
+                        jogador.Jogada = 0;
                     }
                 }
 
@@ -343,48 +350,46 @@ namespace Cartagena
             
         }
 
-        private void btnMoverAtras_Click(object sender, EventArgs e)
+        private void enviaMsg(String msg, String tipo)
         {
-            try
-            {
-                this.game.voltarPirata(this.meuJogador, int.Parse(txtPosicao.Text));
-                exibirPiratas();
-                exibirCartas();
-            }
-            catch (Exception e1)
-            {
-
-                enviaMsg(e1.Message, "erro");
-            }
-           
+            MensagensView message = new MensagensView(msg, tipo);
+            message.ShowDialog();
         }
 
-        private void btnMoverFrente_Click(object sender, EventArgs e)
+        private void preencherDataGridJogadoresView()
         {
-            try
+            if (!this.partida.Iniciou)
             {
-                this.game.moverPirata(this.meuJogador, int.Parse(txtPosicao.Text), txtCarta.Text);
-                exibirPiratas();
-                exibirCartas();
+                this.jogadores = this.game.exibirJogadores(this.partida.Id);
+                this.jogadores = atualizarImgPiratas(this.jogadores);
             }
-            catch (Exception e1)
-            {
-                enviaMsg(e1.Message, "erro");
-            }
-        }
 
-        private void btnPularVez_Click(object sender, EventArgs e)
-        {
-            try
+            dtgJogadores.DataSource = this.jogadores;
+            dtgJogadores.ClearSelection();
+
+            dtgJogadores.Columns["Id"].Width = 63;
+            dtgJogadores.Columns["Nome"].Width = 91;
+            dtgJogadores.Columns["Cor"].Width = 110;
+            dtgJogadores.Columns["Status"].Width = 140;
+            dtgJogadores.Columns["Jogada"].Width = 77;
+
+            dtgJogadores.Columns["ImgPirata"].Visible = false;
+            dtgJogadores.Columns["ColorPirata"].Visible = false;
+            dtgJogadores.Columns["Senha"].Visible = false;
+
+            foreach (DataGridViewRow row in dtgJogadores.Rows)
             {
-                this.game.pularVez(this.meuJogador);
-                exibirPiratas();
-                exibirCartas();
+                foreach (Jogador j in this.jogadores)
+                {
+                    if (Convert.ToInt32(row.Cells["Id"].Value) == j.Id)
+                    {
+                        row.DefaultCellStyle.ForeColor = j.ColorPirata;
+                        row.DefaultCellStyle.SelectionForeColor = j.ColorPirata;
+                    }
+                }
             }
-            catch (Exception e1)
-            {
-                enviaMsg(e1.Message, "erro");
-            }
+
+            dtgJogadores.Refresh();
         }
 
         private List<Jogador> atualizarImgPiratas(List<Jogador> j)
@@ -394,26 +399,31 @@ namespace Cartagena
                 if (jo.Cor.Equals("Vermelho"))
                 {
                     jo.ImgPirata = Cartagena.Properties.Resources.vermelho;
+                    jo.ColorPirata = System.Drawing.Color.FromArgb(152, 28, 12);
                 }
 
                 if (jo.Cor.Equals("Azul"))
                 {
                     jo.ImgPirata = Cartagena.Properties.Resources.azul;
+                    jo.ColorPirata = System.Drawing.Color.FromArgb(12, 135, 152);
                 }
 
-                if (jo.Cor.Equals("Laranja"))
+                if (jo.Cor.Equals("Amarelo"))
                 {
-                    jo.ImgPirata = Cartagena.Properties.Resources.laranja;
+                    jo.ImgPirata = Cartagena.Properties.Resources.amarelo;
+                    jo.ColorPirata = System.Drawing.Color.FromArgb(228, 220, 36);
                 }
 
                 if (jo.Cor.Equals("Verde"))
                 {
                     jo.ImgPirata = Cartagena.Properties.Resources.verde;
+                    jo.ColorPirata = System.Drawing.Color.FromArgb(12, 148, 25);
                 }
 
                 if (jo.Cor.Equals("Marrom"))
                 {
                     jo.ImgPirata = Properties.Resources.marrom;
+                    jo.ColorPirata = System.Drawing.Color.FromArgb(76, 4, 4);
                 }
             }
 
@@ -511,5 +521,51 @@ namespace Cartagena
 
             return c;
         }
+
+        private void btnMoverAtras_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.voltarPirata(this.meuJogador, int.Parse(txtPosicao.Text));
+                exibirPiratas();
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+
+                enviaMsg(e1.Message, "erro");
+            }
+
+        }
+
+        private void btnMoverFrente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.moverPirata(this.meuJogador, int.Parse(txtPosicao.Text), txtCarta.Text);
+                exibirPiratas();
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
+        }
+
+        private void btnPularVez_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.game.pularVez(this.meuJogador);
+                exibirPiratas();
+                exibirCartas();
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
+        }
+
+
     }
 }
