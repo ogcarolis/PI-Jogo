@@ -43,10 +43,11 @@ namespace Cartagena.view
                 int w = 287, h;
                 panelHistorico.Controls.Clear();
 
-                ScrollBar vScrollBar = new VScrollBar();
-                vScrollBar.Dock = DockStyle.Right;
-                vScrollBar.Scroll += (sender, e) => { panelHistorico.VerticalScroll.Value = vScrollBar.Value; };
-                panelHistorico.Controls.Add(vScrollBar);
+                panelHistorico.AutoScroll = false;
+                panelHistorico.HorizontalScroll.Enabled = false;
+                panelHistorico.HorizontalScroll.Visible = false;
+                panelHistorico.HorizontalScroll.Maximum = 0;
+                panelHistorico.AutoScroll = true;
 
                 for (int i = 0; i < historico.Count; i++)
                 {

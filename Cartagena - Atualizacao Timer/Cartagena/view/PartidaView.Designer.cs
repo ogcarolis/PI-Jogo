@@ -292,7 +292,7 @@
             this.btnVoltar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnVoltar.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVoltar.ForeColor = System.Drawing.Color.White;
-            this.btnVoltar.Location = new System.Drawing.Point(882, 618);
+            this.btnVoltar.Location = new System.Drawing.Point(877, 614);
             this.btnVoltar.Name = "btnVoltar";
             this.btnVoltar.Size = new System.Drawing.Size(159, 35);
             this.btnVoltar.TabIndex = 18;
@@ -305,7 +305,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo_partida;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1071, 671);
+            this.ClientSize = new System.Drawing.Size(1071, 663);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.lblNomePartida);
             this.Controls.Add(this.panelJogar);
@@ -318,7 +318,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "PartidaView";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bogotá";
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).EndInit();
             this.panelCartas.ResumeLayout(false);

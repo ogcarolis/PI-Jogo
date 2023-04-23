@@ -306,7 +306,6 @@
             this.Name = "InicioView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cartagena Game";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InicioView_FormClosed);
             this.panelEntrar.ResumeLayout(false);
             this.panelEntrar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPartidas)).EndInit();

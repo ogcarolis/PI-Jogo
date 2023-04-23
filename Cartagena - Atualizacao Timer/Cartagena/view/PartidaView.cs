@@ -97,7 +97,7 @@ namespace Cartagena
         {
             try
             {
-                int x = 287, y = 586;
+                int x = 284, y = 586;
 
                 this.tabuleiro = this.game.exibirTabuleiro(this.partida.Id);
                 this.tabuleiro = atualizarImgPosicoes(this.tabuleiro);
@@ -125,8 +125,16 @@ namespace Cartagena
                     p.Width = this.tabuleiro[i].W;
                     p.Height = this.tabuleiro[i].H;
                     p.BackgroundImage = this.tabuleiro[i].Img;
-                    p.BackgroundImageLayout = ImageLayout.Zoom;
 
+                    if(i == 0)
+                    {
+                        p.BackgroundImageLayout = ImageLayout.Stretch;
+                    }
+                    else
+                    {
+                        p.BackgroundImageLayout = ImageLayout.Zoom;
+                    }
+                    
                     this.panelPosTabuleiro.Add(p);
 
                     if(i >= 1)
@@ -205,7 +213,8 @@ namespace Cartagena
                 for(int i = 0; i < this.tabuleiro.Count; i++)
                 {
                     int x = 25, y = 0;
-                    int x0 = 4, y0 = 8;
+                    int x0 = 4, y0 = 18;
+                    int xF = 57, yF = 0;
 
                     for (int l = 0; l < this.tabuleiro[i].Piratas.Count; l++)
                     {
@@ -223,7 +232,18 @@ namespace Cartagena
                             if(l == 11 || l == 23)
                             {
                                 x0 = 4;
-                                y0 += 26;
+                                y0 += 22;
+                            }
+                        }
+                        else if (i == 37)
+                        {
+                            p.Location = new System.Drawing.Point(xF, yF);
+                            xF += 20;
+
+                            if (l == 5 || l == 11 || l == 17 || l == 23)
+                            {
+                                xF = 57;
+                                yF += 18;
                             }
                         }
                         else
@@ -441,6 +461,7 @@ namespace Cartagena
                 {
                     t.W = 259;
                     t.H = 88;
+                    t.Img = Cartagena.Properties.Resources.areia;
                 }
 
                 if (t.Posicao == 37)
@@ -532,7 +553,6 @@ namespace Cartagena
             }
             catch (Exception e1)
             {
-
                 enviaMsg(e1.Message, "erro");
             }
 

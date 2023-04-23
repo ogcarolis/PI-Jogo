@@ -66,7 +66,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo_partida;
-            this.ClientSize = new System.Drawing.Size(361, 667);
+            this.ClientSize = new System.Drawing.Size(361, 663);
             this.Controls.Add(this.lblHistorico);
             this.Controls.Add(this.panelHistorico);
             this.DoubleBuffered = true;
