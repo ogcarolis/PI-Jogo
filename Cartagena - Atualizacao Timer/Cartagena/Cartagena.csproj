@@ -201,13 +201,7 @@
     <None Include="img\azul.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="img\fundo-historico.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="img\amarelo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\pa.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="img\areia.png" />
