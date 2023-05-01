@@ -270,7 +270,7 @@
             // 
             // tmrVez
             // 
-            this.tmrVez.Interval = 10000;
+            this.tmrVez.Interval = 5000;
             this.tmrVez.Tick += new System.EventHandler(this.tmrVez_Tick);
             // 
             // lblNomePartida

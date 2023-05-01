@@ -65,9 +65,10 @@ namespace Cartagena
             {
                 string retorno = this.game.iniciarPartida(this.meuJogador);
                 enviaMsg("Partida Iniciada! Jogador: " + this.meuJogador.Nome, "check");
-                
-                this.partida.Iniciou = true;
+                enviaMsg(retorno, "erro");
 
+                this.partida.Iniciou = true;
+                
                 exibirTabuleiro();
                 exibirPiratas();
                 exibirCartas();
@@ -116,7 +117,7 @@ namespace Cartagena
                     if (i == 0)
                     {
                         this.tabuleiro[i].X = 3;
-                        this.tabuleiro[i].Y = 569;
+                        this.tabuleiro[i].Y = 576;
                     }
                     
                     Panel p = new Panel();
