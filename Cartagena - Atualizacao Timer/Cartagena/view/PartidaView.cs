@@ -378,6 +378,8 @@ namespace Cartagena
                             enviaMsg("check", "Partida Finalizada. Vencedor(a): " + this.jogadores[i].Nome);
                             tmrVez.Enabled = false;
                         }
+
+                        qtdPiratas = 0;
                     }
 
                 }
@@ -622,6 +624,11 @@ namespace Cartagena
             }
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true;
+            base.OnClosing(e);
+        }
 
     }
 }
