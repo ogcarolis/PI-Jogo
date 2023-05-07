@@ -14,8 +14,13 @@ namespace Cartagena
     public partial class InicioView : Form
     {
         Game game;
+
         Jogador meuJogador;
         Partida partidaSelecionada;
+
+        List<Partida> partidas;
+        List<Jogador> jogadores;
+
         public InicioView()
         {
             InitializeComponent();
@@ -23,8 +28,12 @@ namespace Cartagena
             try
             {
                 this.game = new Game();
+
                 this.meuJogador = new Jogador();
                 this.partidaSelecionada = new Partida();
+
+                this.jogadores = new List<Jogador>();
+                this.partidas = new List<Partida>();
 
                 tmrJogador.Enabled = true;
                 tmrPartida.Enabled = true;
@@ -50,6 +59,19 @@ namespace Cartagena
                 enviaMsg(e1.Message, "erro");
             }
             
+        }
+
+        private void txt_pesquisa_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                var partidas = from tb in this.partidas where tb.Nome.StartsWith(txt_pesquisa.Text) select tb;
+                dtgPartidas.DataSource = partidas.ToList();
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
         }
 
         private void dtgPartidas_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -138,16 +160,15 @@ namespace Cartagena
 
         private void preencherDataGridView()
         {
-            List<Partida> partidas = new List<Partida>();
-            partidas = this.game.exibirPartidas("A");
-            partidas.AddRange(this.game.exibirPartidas("J"));
+            this.partidas = this.game.exibirPartidas("A");
+            this.partidas.AddRange(this.game.exibirPartidas("J"));
 
             dtgPartidas.Columns.Clear();
-            dtgPartidas.DataSource = partidas;
+            dtgPartidas.DataSource = this.partidas;
 
             dtgPartidas.Columns["Id"].Width = 70;
             dtgPartidas.Columns["Nome"].Width = 185;
-            dtgPartidas.Columns["Status"].Width = 100;
+            dtgPartidas.Columns["Status"].Width = 115;
 
             dtgPartidas.Columns["Iniciou"].Visible = false;
             dtgPartidas.Columns["DtCriacao"].Visible = false;
@@ -157,8 +178,7 @@ namespace Cartagena
 
         private void preencherDataGridJogadoresView()
         {
-            List<Jogador> jogadores = new List<Jogador>();
-            jogadores = this.game.exibirJogadores(this.partidaSelecionada.Id);
+            this.jogadores = this.game.exibirJogadores(this.partidaSelecionada.Id);
 
             dtgJogadores.Visible = true;
             dtgJogadores.Columns.Clear();
@@ -186,7 +206,10 @@ namespace Cartagena
 
         private void tmrPartida_Tick(object sender, EventArgs e)
         {
-            preencherDataGridView();
+            if(txt_pesquisa.Text == "")
+            {
+                preencherDataGridView();
+            }
         }
 
         private void tmrJogador_Tick(object sender, EventArgs e)
@@ -196,6 +219,6 @@ namespace Cartagena
             }
         }
 
-    
+        
     }
 }

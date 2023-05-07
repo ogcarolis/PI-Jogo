@@ -54,10 +54,13 @@
             this.tmrJogador = new System.Windows.Forms.Timer(this.components);
             this.btnVerPartida = new System.Windows.Forms.Button();
             this.picLogo = new System.Windows.Forms.PictureBox();
+            this.txt_pesquisa = new System.Windows.Forms.TextBox();
+            this.picLupa = new System.Windows.Forms.PictureBox();
             this.panelEntrar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPartidas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLupa)).BeginInit();
             this.SuspendLayout();
             // 
             // panelEntrar
@@ -176,7 +179,7 @@
             this.dtgPartidas.DefaultCellStyle = dataGridViewCellStyle3;
             this.dtgPartidas.EnableHeadersVisualStyles = false;
             this.dtgPartidas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(132)))));
-            this.dtgPartidas.Location = new System.Drawing.Point(501, 59);
+            this.dtgPartidas.Location = new System.Drawing.Point(501, 91);
             this.dtgPartidas.MultiSelect = false;
             this.dtgPartidas.Name = "dtgPartidas";
             this.dtgPartidas.ReadOnly = true;
@@ -200,7 +203,7 @@
             this.dtgPartidas.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dtgPartidas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dtgPartidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgPartidas.Size = new System.Drawing.Size(370, 560);
+            this.dtgPartidas.Size = new System.Drawing.Size(370, 528);
             this.dtgPartidas.TabIndex = 1;
             this.dtgPartidas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgPartidas_CellContentClick);
             // 
@@ -317,6 +320,29 @@
             this.picLogo.TabIndex = 8;
             this.picLogo.TabStop = false;
             // 
+            // txt_pesquisa
+            // 
+            this.txt_pesquisa.BackColor = System.Drawing.Color.White;
+            this.txt_pesquisa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_pesquisa.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_pesquisa.ForeColor = System.Drawing.Color.Black;
+            this.txt_pesquisa.Location = new System.Drawing.Point(533, 55);
+            this.txt_pesquisa.Name = "txt_pesquisa";
+            this.txt_pesquisa.Size = new System.Drawing.Size(338, 30);
+            this.txt_pesquisa.TabIndex = 9;
+            this.txt_pesquisa.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_pesquisa_KeyUp);
+            // 
+            // picLupa
+            // 
+            this.picLupa.BackColor = System.Drawing.Color.Transparent;
+            this.picLupa.BackgroundImage = global::Cartagena.Properties.Resources.icone_lupa1;
+            this.picLupa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picLupa.Location = new System.Drawing.Point(504, 59);
+            this.picLupa.Name = "picLupa";
+            this.picLupa.Size = new System.Drawing.Size(23, 23);
+            this.picLupa.TabIndex = 10;
+            this.picLupa.TabStop = false;
+            // 
             // InicioView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -324,6 +350,8 @@
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(993, 667);
+            this.Controls.Add(this.picLupa);
+            this.Controls.Add(this.txt_pesquisa);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.btnVerPartida);
             this.Controls.Add(this.dtgJogadores);
@@ -343,7 +371,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgPartidas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLupa)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -362,6 +392,8 @@
         private System.Windows.Forms.Timer tmrJogador;
         private System.Windows.Forms.Button btnVerPartida;
         private System.Windows.Forms.PictureBox picLogo;
+        private System.Windows.Forms.TextBox txt_pesquisa;
+        private System.Windows.Forms.PictureBox picLupa;
     }
 }
 
