@@ -48,7 +48,7 @@ namespace Cartagena.view
                 panelHistorico.HorizontalScroll.Visible = false;
                 panelHistorico.HorizontalScroll.Maximum = 0;
                 panelHistorico.AutoScroll = true;
-
+                
                 for (int i = 0; i < historico.Count; i++)
                 {
                     Label l = new Label();
@@ -82,6 +82,8 @@ namespace Cartagena.view
                     panelHistorico.Controls.Add(l);
                     y += h;
                 }
+
+                panelHistorico.VerticalScroll.Value = panelHistorico.VerticalScroll.Maximum;
             }
         }
 
@@ -89,5 +91,12 @@ namespace Cartagena.view
         {
             exibirHistorico();
         }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true;
+            base.OnClosing(e);
+        }
+
     }
 }

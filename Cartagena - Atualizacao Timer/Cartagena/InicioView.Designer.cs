@@ -52,9 +52,12 @@
             this.dtgJogadores = new System.Windows.Forms.DataGridView();
             this.tmrPartida = new System.Windows.Forms.Timer(this.components);
             this.tmrJogador = new System.Windows.Forms.Timer(this.components);
+            this.btnVerPartida = new System.Windows.Forms.Button();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.panelEntrar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPartidas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelEntrar
@@ -66,7 +69,7 @@
             this.panelEntrar.Controls.Add(this.txtNome);
             this.panelEntrar.Controls.Add(this.lblSenha);
             this.panelEntrar.Controls.Add(this.lblNome);
-            this.panelEntrar.Location = new System.Drawing.Point(106, 402);
+            this.panelEntrar.Location = new System.Drawing.Point(117, 444);
             this.panelEntrar.Name = "panelEntrar";
             this.panelEntrar.Size = new System.Drawing.Size(284, 175);
             this.panelEntrar.TabIndex = 2;
@@ -173,7 +176,7 @@
             this.dtgPartidas.DefaultCellStyle = dataGridViewCellStyle3;
             this.dtgPartidas.EnableHeadersVisualStyles = false;
             this.dtgPartidas.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(132)))));
-            this.dtgPartidas.Location = new System.Drawing.Point(605, 99);
+            this.dtgPartidas.Location = new System.Drawing.Point(501, 59);
             this.dtgPartidas.MultiSelect = false;
             this.dtgPartidas.Name = "dtgPartidas";
             this.dtgPartidas.ReadOnly = true;
@@ -195,8 +198,9 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(135)))), ((int)(((byte)(119)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
             this.dtgPartidas.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dtgPartidas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dtgPartidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgPartidas.Size = new System.Drawing.Size(270, 478);
+            this.dtgPartidas.Size = new System.Drawing.Size(370, 560);
             this.dtgPartidas.TabIndex = 1;
             this.dtgPartidas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgPartidas_CellContentClick);
             // 
@@ -206,7 +210,7 @@
             this.btnCriarPartida.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCriarPartida.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCriarPartida.ForeColor = System.Drawing.Color.Black;
-            this.btnCriarPartida.Location = new System.Drawing.Point(106, 101);
+            this.btnCriarPartida.Location = new System.Drawing.Point(117, 164);
             this.btnCriarPartida.Name = "btnCriarPartida";
             this.btnCriarPartida.Size = new System.Drawing.Size(284, 46);
             this.btnCriarPartida.TabIndex = 4;
@@ -250,7 +254,7 @@
             this.dtgJogadores.DefaultCellStyle = dataGridViewCellStyle8;
             this.dtgJogadores.EnableHeadersVisualStyles = false;
             this.dtgJogadores.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(132)))));
-            this.dtgJogadores.Location = new System.Drawing.Point(106, 210);
+            this.dtgJogadores.Location = new System.Drawing.Point(117, 268);
             this.dtgJogadores.MultiSelect = false;
             this.dtgJogadores.Name = "dtgJogadores";
             this.dtgJogadores.ReadOnly = true;
@@ -279,13 +283,39 @@
             // 
             // tmrPartida
             // 
-            this.tmrPartida.Interval = 5000;
+            this.tmrPartida.Interval = 8000;
             this.tmrPartida.Tick += new System.EventHandler(this.tmrPartida_Tick);
             // 
             // tmrJogador
             // 
             this.tmrJogador.Interval = 5000;
             this.tmrJogador.Tick += new System.EventHandler(this.tmrJogador_Tick);
+            // 
+            // btnVerPartida
+            // 
+            this.btnVerPartida.BackColor = System.Drawing.Color.Transparent;
+            this.btnVerPartida.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVerPartida.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerPartida.ForeColor = System.Drawing.Color.Black;
+            this.btnVerPartida.Location = new System.Drawing.Point(117, 215);
+            this.btnVerPartida.Name = "btnVerPartida";
+            this.btnVerPartida.Size = new System.Drawing.Size(284, 46);
+            this.btnVerPartida.TabIndex = 7;
+            this.btnVerPartida.Text = "Assistir Partida";
+            this.btnVerPartida.UseVisualStyleBackColor = false;
+            this.btnVerPartida.Visible = false;
+            this.btnVerPartida.Click += new System.EventHandler(this.btnVerPartida_Click);
+            // 
+            // picLogo
+            // 
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.BackgroundImage = global::Cartagena.Properties.Resources.logo;
+            this.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picLogo.Location = new System.Drawing.Point(163, 12);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(189, 140);
+            this.picLogo.TabIndex = 8;
+            this.picLogo.TabStop = false;
             // 
             // InicioView
             // 
@@ -294,6 +324,8 @@
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(993, 667);
+            this.Controls.Add(this.picLogo);
+            this.Controls.Add(this.btnVerPartida);
             this.Controls.Add(this.dtgJogadores);
             this.Controls.Add(this.btnCriarPartida);
             this.Controls.Add(this.dtgPartidas);
@@ -310,6 +342,7 @@
             this.panelEntrar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPartidas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -327,6 +360,8 @@
         private System.Windows.Forms.Label lblNomePartida;
         private System.Windows.Forms.Timer tmrPartida;
         private System.Windows.Forms.Timer tmrJogador;
+        private System.Windows.Forms.Button btnVerPartida;
+        private System.Windows.Forms.PictureBox picLogo;
     }
 }
 

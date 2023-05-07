@@ -66,10 +66,22 @@ namespace Cartagena
                     this.partidaSelecionada.DtCriacao = row.Cells["DtCriacao"].Value.ToString();
                     this.partidaSelecionada.Iniciou = false;
 
-                    lblNomePartida.Text = "Partida Selecionada: " + this.partidaSelecionada.Nome;
+                    if (row.Cells["Status"].Value.ToString().Equals("Em Jogo"))
+                    {
+                        btnVerPartida.Visible = true;
 
-                    preencherDataGridJogadoresView();
-                    panelEntrar.Visible = true;             
+                        preencherDataGridJogadoresView();
+                        panelEntrar.Visible = false;
+                    }
+                    else
+                    {
+                        btnVerPartida.Visible = false;
+
+                        lblNomePartida.Text = "Partida Selecionada: " + this.partidaSelecionada.Nome;
+
+                        preencherDataGridJogadoresView();
+                        panelEntrar.Visible = true;
+                    }
                 }
             }
             catch (Exception e1)
@@ -98,6 +110,22 @@ namespace Cartagena
            
         }
 
+        private void btnVerPartida_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.meuJogador = null;
+
+                PartidaView p = new PartidaView(this.partidaSelecionada, this.meuJogador);
+                p.Show();
+                this.Hide();
+            }
+            catch (Exception e1)
+            {
+                enviaMsg(e1.Message, "erro");
+            }
+        }
+
         private void limparDados()
         {
             panelEntrar.Visible = false;
@@ -112,14 +140,15 @@ namespace Cartagena
         {
             List<Partida> partidas = new List<Partida>();
             partidas = this.game.exibirPartidas("A");
+            partidas.AddRange(this.game.exibirPartidas("J"));
 
             dtgPartidas.Columns.Clear();
             dtgPartidas.DataSource = partidas;
 
-            dtgPartidas.Columns["Id"].Width = 85;
+            dtgPartidas.Columns["Id"].Width = 70;
             dtgPartidas.Columns["Nome"].Width = 185;
+            dtgPartidas.Columns["Status"].Width = 100;
 
-            dtgPartidas.Columns["Status"].Visible = false;
             dtgPartidas.Columns["Iniciou"].Visible = false;
             dtgPartidas.Columns["DtCriacao"].Visible = false;
 
@@ -166,5 +195,7 @@ namespace Cartagena
                 preencherDataGridJogadoresView();
             }
         }
+
+    
     }
 }

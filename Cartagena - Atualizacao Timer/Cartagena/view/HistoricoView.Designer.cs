@@ -33,10 +33,12 @@
             this.panelHistorico = new System.Windows.Forms.Panel();
             this.lblHistorico = new System.Windows.Forms.Label();
             this.tmrHistorico = new System.Windows.Forms.Timer(this.components);
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.SuspendLayout();
             // 
             // panelHistorico
             // 
+            this.panelHistorico.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(132)))));
             this.panelHistorico.Location = new System.Drawing.Point(27, 68);
             this.panelHistorico.Name = "panelHistorico";
@@ -58,7 +60,7 @@
             // 
             // tmrHistorico
             // 
-            this.tmrHistorico.Interval = 10000;
+            this.tmrHistorico.Interval = 5000;
             this.tmrHistorico.Tick += new System.EventHandler(this.tmrHistorico_Tick);
             // 
             // HistoricoView
@@ -66,7 +68,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo_partida;
-            this.ClientSize = new System.Drawing.Size(361, 663);
+            this.ClientSize = new System.Drawing.Size(368, 663);
             this.Controls.Add(this.lblHistorico);
             this.Controls.Add(this.panelHistorico);
             this.DoubleBuffered = true;
@@ -85,5 +87,6 @@
         private System.Windows.Forms.Panel panelHistorico;
         private System.Windows.Forms.Label lblHistorico;
         private System.Windows.Forms.Timer tmrHistorico;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
     }
 }

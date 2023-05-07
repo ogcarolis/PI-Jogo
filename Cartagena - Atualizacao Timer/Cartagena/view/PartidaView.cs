@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -63,18 +64,26 @@ namespace Cartagena
         {
             try
             {
-                string retorno = this.game.iniciarPartida(this.meuJogador);
-                enviaMsg("Partida Iniciada! Jogador: " + this.meuJogador.Nome, "check");
-                enviaMsg(retorno, "erro");
+                if(this.meuJogador != null)
+                {
+                    string retorno = this.game.iniciarPartida(this.meuJogador);
+                    enviaMsg("Partida Iniciada! Jogador: " + this.meuJogador.Nome, "check");
+                    enviaMsg(retorno, "erro");
 
-                this.partida.Iniciou = true;
-                
-                exibirTabuleiro();
-                exibirPiratas();
-                exibirCartas();
-                exibirHistorico();
-               
-                btnIniciarPartida.Visible = false;
+                    this.partida.Iniciou = true;
+
+                    exibirTabuleiro();
+                    exibirPiratas();
+                    exibirCartas();
+                    exibirHistorico();
+
+                    btnIniciarPartida.Visible = false;
+                }
+                else
+                {
+                    enviaMsg("Você está apenas assistindo a partida!", "aviso");
+                    btnIniciarPartida.Visible = false;
+                }
             }
             catch (Exception e1)
             {
@@ -116,7 +125,7 @@ namespace Cartagena
 
                     if (i == 0)
                     {
-                        this.tabuleiro[i].X = 3;
+                        this.tabuleiro[i].X = 0;
                         this.tabuleiro[i].Y = 576;
                     }
                     
@@ -214,7 +223,7 @@ namespace Cartagena
                 for(int i = 0; i < this.tabuleiro.Count; i++)
                 {
                     int x = 25, y = 0;
-                    int x0 = 4, y0 = 18;
+                    int x0 = 4, y0 = 24;
                     int xF = 57, yF = 0;
 
                     for (int l = 0; l < this.tabuleiro[i].Piratas.Count; l++)
@@ -270,36 +279,39 @@ namespace Cartagena
         {
             try
             {
-                panelCartas.Visible = true;
-                int x = 4, y = 39;
-
-                this.cartas = this.game.consultarMao(this.meuJogador);
-                this.cartas = atualizarImgCartas(this.cartas);
-
-                for (int i = 0; i < this.picCartas.Count; i++)
+                if(this.meuJogador != null)
                 {
-                    panelCartas.Controls.Remove(this.picCartas[i]);
-                   
-                }
+                    panelCartas.Visible = true;
+                    int x = 4, y = 39;
 
-                this.picCartas.Clear();
-                for (int i = 0; i < this.cartas.Count; i++)
-                {
-                    PictureBox p = new PictureBox();
+                    this.cartas = this.game.consultarMao(this.meuJogador);
+                    this.cartas = atualizarImgCartas(this.cartas);
 
-                    p.Location = new System.Drawing.Point(x, y);
-                    p.Width = 79;
-                    p.Height = 121;
-                    p.BackgroundImage = this.cartas[i].Img;
-                    p.BackgroundImageLayout = ImageLayout.Stretch;
+                    for (int i = 0; i < this.picCartas.Count; i++)
+                    {
+                        panelCartas.Controls.Remove(this.picCartas[i]);
 
-                    this.picCartas.Add(p);
-                    x += 40;
-                }
+                    }
 
-                for (int i = 0; i < this.picCartas.Count; i++)
-                {
-                    panelCartas.Controls.Add(this.picCartas[i]);
+                    this.picCartas.Clear();
+                    for (int i = 0; i < this.cartas.Count; i++)
+                    {
+                        PictureBox p = new PictureBox();
+
+                        p.Location = new System.Drawing.Point(x, y);
+                        p.Width = 79;
+                        p.Height = 121;
+                        p.BackgroundImage = this.cartas[i].Img;
+                        p.BackgroundImageLayout = ImageLayout.Stretch;
+
+                        this.picCartas.Add(p);
+                        x += 40;
+                    }
+
+                    for (int i = 0; i < this.picCartas.Count; i++)
+                    {
+                        panelCartas.Controls.Add(this.picCartas[i]);
+                    }
                 }
             }
             catch (Exception e1)
@@ -346,6 +358,29 @@ namespace Cartagena
 
                 exibirHistorico();
                 exibirPiratas();
+
+                if (this.tabuleiro[37].Piratas.Count >= 6)
+                {
+                    int qtdPiratas = 0;
+
+                    for (int i = 0; i < this.jogadores.Count; i++)
+                    {
+                        foreach (Pirata pirata in this.tabuleiro[37].Piratas)
+                        {
+                            if (pirata.Jogador.Id == this.jogadores[i].Id)
+                            {
+                                qtdPiratas++;
+                            }
+                        }
+
+                        if (qtdPiratas == 6)
+                        {
+                            enviaMsg("check", "Partida Finalizada. Vencedor(a): " + this.jogadores[i].Nome);
+                            tmrVez.Enabled = false;
+                        }
+                    }
+
+                }
 
                 if (panelCartas.Visible == false || jVez.Equals(this.meuJogador))
                 {
@@ -432,7 +467,7 @@ namespace Cartagena
                 if (jo.Cor.Equals("Amarelo"))
                 {
                     jo.ImgPirata = Cartagena.Properties.Resources.amarelo;
-                    jo.ColorPirata = System.Drawing.Color.FromArgb(228, 220, 36);
+                    jo.ColorPirata = System.Drawing.Color.FromArgb(255, 194, 0);
                 }
 
                 if (jo.Cor.Equals("Verde"))

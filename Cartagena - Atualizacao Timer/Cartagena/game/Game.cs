@@ -160,9 +160,18 @@ namespace Cartagena{
                 p.Id = int.Parse(infoPartidas[0]);
                 p.Nome = infoPartidas[1];
                 p.DtCriacao = infoPartidas[2];
-                p.Status = infoPartidas[3];
-                partidas.Add(p);
 
+                if (infoPartidas[3].Equals("A"))
+                {
+                    p.Status = "Aberta";
+                }
+
+                if (infoPartidas[3].Equals("J"))
+                {
+                    p.Status = "Em Jogo";
+                }
+
+                partidas.Add(p);
             }
 
             return partidas;

@@ -115,6 +115,7 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(135)))), ((int)(((byte)(119)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
             this.dtgJogadores.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dtgJogadores.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dtgJogadores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgJogadores.Size = new System.Drawing.Size(481, 147);
             this.dtgJogadores.TabIndex = 7;
