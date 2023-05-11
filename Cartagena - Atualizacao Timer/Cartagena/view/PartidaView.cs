@@ -27,6 +27,8 @@ namespace Cartagena
         Partida partida;
         Jogador meuJogador;
 
+        bool automacao;
+
         HistoricoView historico;
 
         public PartidaView(Partida p, Jogador j)
@@ -52,7 +54,17 @@ namespace Cartagena
                 tmrViewJogadores.Enabled = true;
                 tmrVez.Enabled = true;
 
+                automacao = false;
+
                 preencherDataGridJogadoresView();
+
+                if(j == null)
+                {
+                    exibirHistorico();
+                    exibirTabuleiro();
+                    exibirPiratas();
+                }
+
             }
             catch (Exception e)
             {
@@ -630,5 +642,19 @@ namespace Cartagena
             base.OnClosing(e);
         }
 
+        private void btnAutomacao_Click(object sender, EventArgs e)
+        {
+            if (automacao)
+            {
+                automacao = false;
+                btnAutomacao.ForeColor = Color.Red;
+            }
+            else
+            {
+                automacao = true;
+                btnAutomacao.ForeColor = Color.Green;
+            }
+            
+        }
     }
 }

@@ -322,7 +322,7 @@
             // 
             // txt_pesquisa
             // 
-            this.txt_pesquisa.BackColor = System.Drawing.Color.White;
+            this.txt_pesquisa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(207)))), ((int)(((byte)(228)))));
             this.txt_pesquisa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_pesquisa.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_pesquisa.ForeColor = System.Drawing.Color.Black;
