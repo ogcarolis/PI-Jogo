@@ -52,6 +52,7 @@
             this.tmrVez = new System.Windows.Forms.Timer(this.components);
             this.lblNomePartida = new System.Windows.Forms.Label();
             this.btnVoltar = new System.Windows.Forms.Button();
+            this.btnAutomacao = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).BeginInit();
             this.panelCartas.SuspendLayout();
             this.panelJogar.SuspendLayout();
@@ -301,12 +302,27 @@
             this.btnVoltar.UseVisualStyleBackColor = false;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
+            // btnAutomacao
+            // 
+            this.btnAutomacao.BackColor = System.Drawing.Color.Transparent;
+            this.btnAutomacao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAutomacao.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAutomacao.ForeColor = System.Drawing.Color.White;
+            this.btnAutomacao.Location = new System.Drawing.Point(561, 614);
+            this.btnAutomacao.Name = "btnAutomacao";
+            this.btnAutomacao.Size = new System.Drawing.Size(159, 35);
+            this.btnAutomacao.TabIndex = 19;
+            this.btnAutomacao.Text = "Automático";
+            this.btnAutomacao.UseVisualStyleBackColor = false;
+            this.btnAutomacao.Click += new System.EventHandler(this.btnAutomacao_Click);
+            // 
             // PartidaView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo_partida;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1071, 663);
+            this.Controls.Add(this.btnAutomacao);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.lblNomePartida);
             this.Controls.Add(this.panelJogar);
@@ -350,5 +366,6 @@
         private System.Windows.Forms.TextBox txtCarta;
         private System.Windows.Forms.Label lblNomePartida;
         private System.Windows.Forms.Button btnVoltar;
+        private System.Windows.Forms.Button btnAutomacao;
     }
 }

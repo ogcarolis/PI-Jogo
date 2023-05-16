@@ -17,6 +17,7 @@ namespace Cartagena
     {
         List<Jogador> jogadores;
         List<Carta> cartas;
+        List<Pirata> piratas;
         List<Elemento> tabuleiro;
 
         List<Panel> panelPosTabuleiro;
@@ -28,6 +29,7 @@ namespace Cartagena
         Jogador meuJogador;
 
         bool automacao;
+        Random random;
 
         HistoricoView historico;
 
@@ -43,6 +45,7 @@ namespace Cartagena
                 
                 this.meuJogador = j;
                 this.cartas = new List<Carta>();
+                this.piratas = new List<Pirata>();
                 this.picCartas = new List<PictureBox>();
 
                 this.game = new Game();
@@ -55,6 +58,7 @@ namespace Cartagena
                 tmrVez.Enabled = true;
 
                 automacao = false;
+                random = new Random();
 
                 preencherDataGridJogadoresView();
 
@@ -416,8 +420,50 @@ namespace Cartagena
                 }
 
                 preencherDataGridJogadoresView();
+
+                if(this.meuJogador != null && jVez.Id == this.meuJogador.Id && automacao)
+                {
+                    int carta = this.random.Next(0, this.cartas.Count);
+
+                    for (int i = 0; i <= 37; i++)
+                    {
+                        foreach (Pirata p in this.tabuleiro[i].Piratas)
+                        {
+                            if(p.Jogador.Id == this.meuJogador.Id)
+                            {
+                                this.piratas.Add(p);
+                            }
+                        }
+                    }
+
+                    foreach (Pirata p in this.piratas)
+                    {
+                        if(this.meuJogador.Jogada == 0)
+                        {
+                            break;
+                        }
+
+                        for(int i = p.Posicao - 1; i >= 1; i--)
+                        {
+                            if (this.tabuleiro[i].Piratas.Count > 0)
+                            {
+                                this.game.voltarPirata(this.meuJogador, p.Posicao);
+                                exibirPiratas();
+                                exibirCartas();
+                                break;
+                            }
+                        }
+
+                        if (this.cartas.Count > 1 && p.Posicao == 0)
+                        {
+                            this.game.moverPirata(this.meuJogador, 0, this.cartas[carta].Simbolo);
+                            exibirPiratas();
+                            exibirCartas();
+                            break;
+                        }
+                    }
+                }
             }
-            
         }
 
         private void enviaMsg(String msg, String tipo)
