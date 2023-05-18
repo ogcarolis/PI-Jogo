@@ -34,10 +34,17 @@ namespace Cartagena
             }   
         }
 
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
         private void enviaMsg(String msg, String tipo)
         {
             MensagensView message = new MensagensView(msg, tipo);
             message.ShowDialog();
         }
+
+        
     }
 }

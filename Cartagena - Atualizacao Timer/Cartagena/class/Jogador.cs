@@ -8,18 +8,14 @@ using System.Threading.Tasks;
 namespace Cartagena {
     public class Jogador {
         int id;
-        int jogadas;
+        int jogada;
         string nome;
         string senha;
         string cor;
         string status;
-        Image imgPirata;
 
-        public Image ImgPirata
-        {
-            get { return imgPirata; }
-            set { imgPirata = value; }
-        }
+        Image imgPirata;
+        Color colorPirata;
 
         public int Id
         {
@@ -51,10 +47,22 @@ namespace Cartagena {
             set { status = value; }
         }
 
-        public int Jogadas
+        public int Jogada
         {
-            get { return jogadas; }
-            set { jogadas = value; }
+            get { return jogada; }
+            set { jogada = value; }
+        }
+
+        public Image ImgPirata
+        {
+            get { return imgPirata; }
+            set { imgPirata = value; }
+        }
+
+        public Color ColorPirata
+        {
+            get { return colorPirata; }
+            set { colorPirata = value; }
         }
 
 

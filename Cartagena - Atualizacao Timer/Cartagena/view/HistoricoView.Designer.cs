@@ -29,40 +29,64 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoricoView));
+            this.panelHistorico = new System.Windows.Forms.Panel();
+            this.lblHistorico = new System.Windows.Forms.Label();
             this.tmrHistorico = new System.Windows.Forms.Timer(this.components);
-            this.lbHistorico = new System.Windows.Forms.ListBox();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.SuspendLayout();
+            // 
+            // panelHistorico
+            // 
+            this.panelHistorico.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelHistorico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(150)))), ((int)(((byte)(132)))));
+            this.panelHistorico.Location = new System.Drawing.Point(27, 68);
+            this.panelHistorico.Name = "panelHistorico";
+            this.panelHistorico.Size = new System.Drawing.Size(309, 551);
+            this.panelHistorico.TabIndex = 19;
+            // 
+            // lblHistorico
+            // 
+            this.lblHistorico.AutoSize = true;
+            this.lblHistorico.BackColor = System.Drawing.Color.Transparent;
+            this.lblHistorico.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHistorico.ForeColor = System.Drawing.Color.White;
+            this.lblHistorico.Location = new System.Drawing.Point(79, 28);
+            this.lblHistorico.Name = "lblHistorico";
+            this.lblHistorico.Size = new System.Drawing.Size(198, 27);
+            this.lblHistorico.TabIndex = 20;
+            this.lblHistorico.Text = "Histórico da partida";
+            this.lblHistorico.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tmrHistorico
             // 
-            this.tmrHistorico.Interval = 12000;
+            this.tmrHistorico.Interval = 5000;
             this.tmrHistorico.Tick += new System.EventHandler(this.tmrHistorico_Tick);
-            // 
-            // lbHistorico
-            // 
-            this.lbHistorico.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHistorico.FormattingEnabled = true;
-            this.lbHistorico.ItemHeight = 16;
-            this.lbHistorico.Location = new System.Drawing.Point(1, 132);
-            this.lbHistorico.Name = "lbHistorico";
-            this.lbHistorico.Size = new System.Drawing.Size(351, 500);
-            this.lbHistorico.TabIndex = 0;
             // 
             // HistoricoView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(352, 646);
-            this.Controls.Add(this.lbHistorico);
+            this.BackgroundImage = global::Cartagena.Properties.Resources.fundo_partida;
+            this.ClientSize = new System.Drawing.Size(368, 663);
+            this.Controls.Add(this.lblHistorico);
+            this.Controls.Add(this.panelHistorico);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "HistoricoView";
-            this.Text = "HistoricoView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "Bogotá";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+        private System.Windows.Forms.Panel panelHistorico;
+        private System.Windows.Forms.Label lblHistorico;
         private System.Windows.Forms.Timer tmrHistorico;
-        private System.Windows.Forms.ListBox lbHistorico;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
     }
 }

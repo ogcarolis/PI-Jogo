@@ -100,7 +100,7 @@ namespace Cartagena{
             {
                 if (j.Id == int.Parse(jogador[1]))
                 {
-                    j.Jogadas = int.Parse(jogador[2]);
+                    j.Jogada = int.Parse(jogador[2]);
                     j.Status = "Sua Vez";
                     jVez = j;
                 }
@@ -160,9 +160,18 @@ namespace Cartagena{
                 p.Id = int.Parse(infoPartidas[0]);
                 p.Nome = infoPartidas[1];
                 p.DtCriacao = infoPartidas[2];
-                p.Status = infoPartidas[3];
-                partidas.Add(p);
 
+                if (infoPartidas[3].Equals("A"))
+                {
+                    p.Status = "Aberta";
+                }
+
+                if (infoPartidas[3].Equals("J"))
+                {
+                    p.Status = "Em Jogo";
+                }
+
+                partidas.Add(p);
             }
 
             return partidas;
@@ -270,7 +279,7 @@ namespace Cartagena{
 
             if (retorno.StartsWith("ERRO"))
             {
-                throw new Exception(retorno.Substring(2));
+                return null;
             }
 
             retorno = retorno.Replace("\r", "");
@@ -285,43 +294,49 @@ namespace Cartagena{
                 {
                     if (j.Id == int.Parse(infoJogador[0]))
                     {
-                        linha += j.Nome + " na jogada " + infoJogador[1] ;
+                        if (i == 0)
+                        {
+                            linha = j.Nome + " iniciou a partida";
+                            historico.Add(linha);
+                        }
+
+                        linha = j.Nome + " na jogada " + infoJogador[1];
                     }
                 }
 
                 switch (infoJogador[2])
                 {
                     case "P":
-                        linha += " jogou a carta PISTOLA";
+                        linha += " jogou a carta PISTOLA e";
                         break;
                     case "E":
-                        linha += " jogou a carta ESQUELETO";
+                        linha += " jogou a carta ESQUELETO e";
                         break;
                     case "C":
-                        linha += " jogou a carta CHAVE";
+                        linha += " jogou a carta CHAVE e";
                         break;
                     case "F":
-                        linha += " jogou a carta FACA";
+                        linha += " jogou a carta FACA e";
                         break;
                     case "G":
-                        linha += " jogou a carta GARRAFA";
+                        linha += " jogou a carta GARRAFA e";
                         break;
                     case "T":
-                        linha += " jogou a carta TRICORNIO";
+                        linha += " jogou a carta TRICORNIO e";
                         break;
                 }
 
                 if (infoJogador[2].Equals("") && !infoJogador[3].Equals(""))
                 {
-                    linha += " MOVEU PARA TRÁS O PIRATA NA POSIÇÃO " + infoJogador[3] + " PARA A POSIÇÃO " + infoJogador[4];
+                    linha += " moveu para trás o pirata na posição " + infoJogador[3] + " para a posição " + infoJogador[4];
                 }
                 else if (!infoJogador[2].Equals("") && !infoJogador[3].Equals(""))
                 {
-                    linha += " MOVEU O PIRATA NA POSIÇÃO " + infoJogador[3] + " PARA A POSIÇÃO " + infoJogador[4];
+                    linha += " moveu o pirata na posição " + infoJogador[3] + " para a posição " + infoJogador[4];
                 }
                 else if (infoJogador[3].Equals(""))
                 {
-                    linha += " PULOU A VEZ";
+                    linha += " pulou a vez";
                 }
 
                 historico.Add(linha);
