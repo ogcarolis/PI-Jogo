@@ -423,9 +423,20 @@ namespace Cartagena
 
                 if(this.meuJogador != null && jVez.Id == this.meuJogador.Id && automacao)
                 {
-                    int carta = this.random.Next(0, this.cartas.Count);
+                    this.piratas.Clear();
 
-                    for (int i = 0; i <= 37; i++)
+                    List<KeyValuePair<string, int>> figDisponivel = new List<KeyValuePair<string, int>>();
+
+                    Pirata pirataSelecionado = new Pirata();
+                    Carta cartaSelecionada = new Carta();
+
+                    bool voltar = false;
+                    bool mover = false;
+                    bool doisPiratas = false;
+
+                    int piratasInicio = 0;
+
+                    for (int i = 0; i < this.tabuleiro.Count; i++)
                     {
                         foreach (Pirata p in this.tabuleiro[i].Piratas)
                         {
@@ -438,32 +449,99 @@ namespace Cartagena
 
                     foreach (Pirata p in this.piratas)
                     {
-                        if(this.meuJogador.Jogada == 0)
+                        if (this.cartas.Count > 4 && p.Posicao >= 0)
                         {
+                            mover = true;
+                            pirataSelecionado = p;
+                            piratasInicio++;
+
+                            figDisponivel = verificaFigDisponivel(p.Posicao + 1);
+                            cartaSelecionada = verificaCartaDisponivel(figDisponivel);
+
                             break;
                         }
 
-                        for(int i = p.Posicao - 1; i >= 1; i--)
+                        for (int i = p.Posicao - 1; i >= 1; i--)
                         {
-                            if (this.tabuleiro[i].Piratas.Count > 0)
+                            if (this.tabuleiro[i].Piratas.Count == 2)
                             {
-                                this.game.voltarPirata(this.meuJogador, p.Posicao);
-                                exibirPiratas();
-                                exibirCartas();
+                                voltar = true;
+                                pirataSelecionado = p;
+                                doisPiratas = true;
                                 break;
                             }
                         }
 
-                        if (this.cartas.Count > 1 && p.Posicao == 0)
-                        {
-                            this.game.moverPirata(this.meuJogador, 0, this.cartas[carta].Simbolo);
-                            exibirPiratas();
-                            exibirCartas();
-                            break;
+                        if (!doisPiratas) {
+                            for (int i = p.Posicao - 1; i >= 1; i--)
+                            {
+                                if (this.tabuleiro[i].Piratas.Count == 1)
+                                {
+                                    voltar = true;
+                                    pirataSelecionado = p;
+                                    break;
+                                }
+                            }
                         }
+                    }
+
+                    if (mover)
+                    {
+                        this.game.moverPirata(this.meuJogador, pirataSelecionado.Posicao, cartaSelecionada.Simbolo);
+                        exibirPiratas();
+                        exibirCartas();
+                    }
+
+                    if (voltar)
+                    {
+                        this.game.voltarPirata(this.meuJogador, pirataSelecionado.Posicao);
+                        exibirPiratas();
+                        exibirCartas();
                     }
                 }
             }
+        }
+
+        private Carta verificaCartaDisponivel(List<KeyValuePair<string, int>> figuras)
+        {
+            foreach (var item in figuras)
+            {
+                foreach (Carta c in this.cartas)
+                {
+                    if (item.Value == 0)
+                    {
+                        return c;
+
+                    }
+
+                    if (c.Simbolo.Equals(item.Key))
+                    {
+                        return c;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private List<KeyValuePair<string, int>> verificaFigDisponivel(int posicao)
+        {
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            dic.Add("C", 0);
+            dic.Add("E", 0);
+            dic.Add("F", 0);
+            dic.Add("T", 0);
+            dic.Add("P", 0);
+            dic.Add("G", 0);
+
+            for (int i = posicao; i < this.tabuleiro.Count - 1; i++)
+            {
+                if(this.tabuleiro[i].Piratas.Count == 0) {
+                    dic[this.tabuleiro[i].Simbolo]++;
+                }
+            }
+
+            return dic.OrderBy(x => x.Key).ToList();   
         }
 
         private void enviaMsg(String msg, String tipo)
@@ -693,7 +771,7 @@ namespace Cartagena
             if (automacao)
             {
                 automacao = false;
-                btnAutomacao.ForeColor = Color.Red;
+                btnAutomacao.ForeColor = Color.DarkRed;
             }
             else
             {
