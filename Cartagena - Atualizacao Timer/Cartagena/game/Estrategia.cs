@@ -29,17 +29,25 @@ namespace Cartagena
             try
             {
                 bool boaJogada = false;
-                bool voltou = false;
+                bool jogou = false;
 
                 Carta cartaJogavel = new Carta();
                 analiseCartas(cartas);
-  
-                if(cartas.Count <= 2 && analiseFigTabuleiro(piratas[0].Posicao, tabuleiro) > cartas.Count)
-                {
-                    voltou = analiseReceberCartas(j, piratas, tabuleiro, 1);
-                }
 
-                if (!voltou)
+                if (cartas.Count <= 2)
+                {
+                    if (!analiseReceberCartas(j, piratas, tabuleiro, 2))
+                    {
+                        jogou = analiseReceberCartas(j, piratas, tabuleiro, 1);
+                    }
+                }
+                else if (analiseFigTabuleiro(piratas[5].Posicao, tabuleiro) > cartas.Count && cartas.Count <= 6)
+                {
+                    jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
+                }
+            
+                
+                if (!jogou)
                 {
                     foreach (Pirata pirata in piratas)
                     {
@@ -74,20 +82,11 @@ namespace Cartagena
                             }
                         }
 
-                        if (!boaJogada && analiseFigTabuleiro(piratas[0].Posicao, tabuleiro) > cartas.Count && cartas.Count < 4)
-                        {
-                            voltou = analiseReceberCartas(j, piratas, tabuleiro, 2);
-
-                            if (voltou)
-                            {
-                                break;
-                            }
-                        }
 
                         if (pirata.Posicao >= 0 && cartaJogavel.Simbolo != "")
                         {
                             this.game.moverPirata(j, pirata.Posicao, cartaJogavel.Simbolo);
-                            voltou = true;
+                            jogou = true;
                             break;
                         }
                         else

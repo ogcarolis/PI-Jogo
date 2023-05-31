@@ -391,8 +391,9 @@ namespace Cartagena
 
                         if (qtdPiratas == 6)
                         {
-                            enviaMsg("Partida Finalizada. Vencedor(a): " + this.jogadores[i].Nome, "check");
                             tmrVez.Enabled = false;
+                            automacao = false;
+                            enviaMsg("Partida Finalizada. Vencedor(a): " + this.jogadores[i].Nome, "check");
                         }
 
                         qtdPiratas = 0;
