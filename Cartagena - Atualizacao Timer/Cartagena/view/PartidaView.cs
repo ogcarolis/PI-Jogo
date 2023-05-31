@@ -25,11 +25,12 @@ namespace Cartagena
         List<PictureBox> picPiratas;
 
         Game game;
+        Estrategia estrategia;
+
         Partida partida;
         Jogador meuJogador;
 
         bool automacao;
-        Random random;
 
         HistoricoView historico;
 
@@ -49,6 +50,7 @@ namespace Cartagena
                 this.picCartas = new List<PictureBox>();
 
                 this.game = new Game();
+                this.estrategia = new Estrategia();
                
                 this.tabuleiro = new List<Elemento>();
                 this.panelPosTabuleiro = new List<Panel>();
@@ -58,7 +60,6 @@ namespace Cartagena
                 tmrVez.Enabled = true;
 
                 automacao = false;
-                random = new Random();
 
                 preencherDataGridJogadoresView();
 
@@ -82,9 +83,8 @@ namespace Cartagena
             {
                 if(this.meuJogador != null)
                 {
-                    string retorno = this.game.iniciarPartida(this.meuJogador);
+                    this.game.iniciarPartida(this.meuJogador);
                     enviaMsg("Partida Iniciada! Jogador: " + this.meuJogador.Nome, "check");
-                    enviaMsg(retorno, "erro");
 
                     this.partida.Iniciou = true;
 
@@ -423,125 +423,32 @@ namespace Cartagena
 
                 if(this.meuJogador != null && jVez.Id == this.meuJogador.Id && automacao)
                 {
-                    this.piratas.Clear();
-
-                    List<KeyValuePair<string, int>> figDisponivel = new List<KeyValuePair<string, int>>();
-
-                    Pirata pirataSelecionado = new Pirata();
-                    Carta cartaSelecionada = new Carta();
-
-                    bool voltar = false;
-                    bool mover = false;
-                    bool doisPiratas = false;
-
-                    int piratasInicio = 0;
-
-                    for (int i = 0; i < this.tabuleiro.Count; i++)
+                    try
                     {
-                        foreach (Pirata p in this.tabuleiro[i].Piratas)
+                        this.piratas.Clear();
+
+                        for (int i = 0; i < this.tabuleiro.Count; i++)
                         {
-                            if(p.Jogador.Id == this.meuJogador.Id)
+                            foreach (Pirata p in this.tabuleiro[i].Piratas)
                             {
-                                this.piratas.Add(p);
-                            }
-                        }
-                    }
-
-                    foreach (Pirata p in this.piratas)
-                    {
-                        if (this.cartas.Count > 4 && p.Posicao >= 0)
-                        {
-                            mover = true;
-                            pirataSelecionado = p;
-                            piratasInicio++;
-
-                            figDisponivel = verificaFigDisponivel(p.Posicao + 1);
-                            cartaSelecionada = verificaCartaDisponivel(figDisponivel);
-
-                            break;
-                        }
-
-                        for (int i = p.Posicao - 1; i >= 1; i--)
-                        {
-                            if (this.tabuleiro[i].Piratas.Count == 2)
-                            {
-                                voltar = true;
-                                pirataSelecionado = p;
-                                doisPiratas = true;
-                                break;
-                            }
-                        }
-
-                        if (!doisPiratas) {
-                            for (int i = p.Posicao - 1; i >= 1; i--)
-                            {
-                                if (this.tabuleiro[i].Piratas.Count == 1)
+                                if (p.Jogador.Id == this.meuJogador.Id)
                                 {
-                                    voltar = true;
-                                    pirataSelecionado = p;
-                                    break;
+                                    this.piratas.Add(p);
                                 }
                             }
                         }
-                    }
 
-                    if (mover)
-                    {
-                        this.game.moverPirata(this.meuJogador, pirataSelecionado.Posicao, cartaSelecionada.Simbolo);
+                        this.estrategia.iniciarJogada(this.meuJogador, this.piratas, this.cartas, this.tabuleiro);
                         exibirPiratas();
                         exibirCartas();
                     }
-
-                    if (voltar)
+                    catch (Exception e1)
                     {
-                        this.game.voltarPirata(this.meuJogador, pirataSelecionado.Posicao);
-                        exibirPiratas();
-                        exibirCartas();
+                        enviaMsg(e1.Message, "erro");
                     }
+                    
                 }
             }
-        }
-
-        private Carta verificaCartaDisponivel(List<KeyValuePair<string, int>> figuras)
-        {
-            foreach (var item in figuras)
-            {
-                foreach (Carta c in this.cartas)
-                {
-                    if (item.Value == 0)
-                    {
-                        return c;
-
-                    }
-
-                    if (c.Simbolo.Equals(item.Key))
-                    {
-                        return c;
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        private List<KeyValuePair<string, int>> verificaFigDisponivel(int posicao)
-        {
-            Dictionary<string, int> dic = new Dictionary<string, int>();
-            dic.Add("C", 0);
-            dic.Add("E", 0);
-            dic.Add("F", 0);
-            dic.Add("T", 0);
-            dic.Add("P", 0);
-            dic.Add("G", 0);
-
-            for (int i = posicao; i < this.tabuleiro.Count - 1; i++)
-            {
-                if(this.tabuleiro[i].Piratas.Count == 0) {
-                    dic[this.tabuleiro[i].Simbolo]++;
-                }
-            }
-
-            return dic.OrderBy(x => x.Key).ToList();   
         }
 
         private void enviaMsg(String msg, String tipo)
