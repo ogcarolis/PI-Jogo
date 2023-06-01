@@ -36,7 +36,7 @@ namespace Cartagena
 
                 analiseCartas(cartas);
 
-                if (piratas[0].Posicao <= 10 && cartas.Count < 7 || cartas.Count <= 2)
+                if(cartas.Count <= 2)
                 {
                     jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
 
@@ -44,10 +44,6 @@ namespace Cartagena
                     {
                         jogou = analiseReceberCartas(j, piratas, tabuleiro, 1);
                     }
-                }
-                else if (piratas[0].Posicao > 10 && piratas[0].Posicao < 20 && cartas.Count <= 7)
-                {
-                    jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
                 }
 
                 if (!jogou)
@@ -58,7 +54,6 @@ namespace Cartagena
 
                         if (!boaJogada && !boaJogada2)
                         {
-
                             foreach (var carta in this.cartasDisponiveis)
                             {
                                 if (carta.Value > 0 && !boaJogada && !boaJogada2)
@@ -104,6 +99,19 @@ namespace Cartagena
                             jogou = true;
                             break;
                         }
+                    }
+
+                    if (!jogou)
+                    {
+                        if (cartas.Count <= 6)
+                        {
+                            jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
+                        }
+                        else if (cartas.Count == 0)
+                        {
+                            this.game.pularVez(j);
+                        }
+
                     }
                 }
             }
