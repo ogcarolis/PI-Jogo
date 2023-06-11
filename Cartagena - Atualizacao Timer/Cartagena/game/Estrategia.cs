@@ -6,7 +6,6 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace Cartagena
 {
     public class Estrategia
@@ -29,59 +28,70 @@ namespace Cartagena
             try
             {
                 bool boaJogada = false;
+                bool boaJogada2 = false;
                 bool jogou = false;
 
                 Carta cartaJogavel = new Carta();
+                cartaJogavel.Simbolo = "";
+
                 analiseCartas(cartas);
 
-                if (cartas.Count <= 2)
+                if(cartas.Count <= 2)
                 {
-                    if (!analiseReceberCartas(j, piratas, tabuleiro, 2))
+                    jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
+
+                    if (!jogou)
                     {
                         jogou = analiseReceberCartas(j, piratas, tabuleiro, 1);
                     }
                 }
-                else if (analiseFigTabuleiro(piratas[5].Posicao, tabuleiro) > cartas.Count && cartas.Count <= 6)
-                {
-                    jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
-                }
-            
-                
+
                 if (!jogou)
                 {
                     foreach (Pirata pirata in piratas)
                     {
                         analiseFigTabuleiro(pirata.Posicao, tabuleiro);
 
-                        foreach (var carta in this.cartasDisponiveis)
+                        if (!boaJogada && !boaJogada2)
                         {
-                            if (carta.Value > 0 && !boaJogada)
+                            foreach (var carta in this.cartasDisponiveis)
                             {
-                                foreach (var figura in this.figDisponiveis)
+                                if (carta.Value > 0 && !boaJogada && !boaJogada2)
                                 {
-                                    if (figura.Key == carta.Key)
+                                    foreach (var figura in this.figDisponiveis)
                                     {
-                                        if (figura.Value == 0)
+                                        if (figura.Key == carta.Key)
                                         {
-                                            cartaJogavel.Simbolo = carta.Key;
-                                            boaJogada = true;
-                                            break;
-                                        }
-                                        else if (carta.Value >= figura.Value)
-                                        {
-                                            cartaJogavel.Simbolo = carta.Key;
-                                            boaJogada = true;
-                                            break;
-                                        }
-                                        else if (carta.Value < figura.Value)
-                                        {
-                                            cartaJogavel.Simbolo = carta.Key;
+                                            if (figura.Value == 0)
+                                            {
+                                                cartaJogavel.Simbolo = carta.Key;
+                                                boaJogada = true;
+                                                break;
+                                            }
+                                            else if (carta.Value >= figura.Value || carta.Value > 1)
+                                            {
+                                                cartaJogavel.Simbolo = carta.Key;
+                                                boaJogada2 = true;
+                                            }
+                                            else if (carta.Value < figura.Value && !boaJogada2)
+                                            {
+                                                int melhorPos = pirata.Posicao + 1;
+                                                cartaJogavel.Simbolo = carta.Key;
+
+                                                for (int i = pirata.Posicao + 1; i <= pirata.Posicao + 6; i++)
+                                                {
+                                                    if (melhorPos >= tabuleiro[melhorPos + 1].Posicao)
+                                                    {
+                                                        cartaJogavel.Simbolo = carta.Key;
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 
+                        }
 
                         if (pirata.Posicao >= 0 && cartaJogavel.Simbolo != "")
                         {
@@ -89,10 +99,17 @@ namespace Cartagena
                             jogou = true;
                             break;
                         }
-                        else
+                    }
+
+                    if (!jogou)
+                    {
+                        if (cartas.Count <= 6)
+                        {
+                            jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
+                        }
+                        else if (cartas.Count == 0)
                         {
                             this.game.pularVez(j);
-                            break;
                         }
 
                     }
@@ -100,7 +117,6 @@ namespace Cartagena
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
