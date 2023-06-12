@@ -36,13 +36,16 @@ namespace Cartagena
 
                 analiseCartas(cartas);
 
-                if(cartas.Count <= 2)
+                if (cartas.Count < analisePosicoes(piratas, 30, 37))
                 {
-                    jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
-
-                    if (!jogou)
+                    if (cartas.Count <= 2)
                     {
-                        jogou = analiseReceberCartas(j, piratas, tabuleiro, 1);
+                        jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
+
+                        if (!jogou)
+                        {
+                            jogou = analiseReceberCartas(j, piratas, tabuleiro, 1);
+                        }
                     }
                 }
 
@@ -107,7 +110,7 @@ namespace Cartagena
                         {
                             jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
                         }
-                        else if (cartas.Count == 0)
+                        else 
                         {
                             this.game.pularVez(j);
                         }
@@ -119,6 +122,21 @@ namespace Cartagena
             {
                 throw;
             }
+        }
+
+        private int analisePosicoes(List<Pirata> piratas, int posI, int posF)
+        {
+            int qtdPiratas = 0;
+
+            foreach(Pirata pirata in piratas)
+            {
+                if(pirata.Posicao > posI && pirata.Posicao < posF)
+                {
+                    qtdPiratas++;
+                }
+            }
+
+            return qtdPiratas;
         }
 
         private bool analiseReceberCartas(Jogador j, List<Pirata> piratas, List<Elemento> tabuleiro, int qtdCartas)
