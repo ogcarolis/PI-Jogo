@@ -36,16 +36,13 @@ namespace Cartagena
 
                 analiseCartas(cartas);
 
-                if (cartas.Count < analisePosicoes(piratas, 30, 37))
+                if (cartas.Count <= 2 && analiseFigTabuleiro(piratas[0].Posicao, tabuleiro) > cartas.Count)
                 {
-                    if (cartas.Count <= 2)
-                    {
-                        jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
+                    jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
 
-                        if (!jogou)
-                        {
-                            jogou = analiseReceberCartas(j, piratas, tabuleiro, 1);
-                        }
+                    if (!jogou)
+                    {
+                        jogou = analiseReceberCartas(j, piratas, tabuleiro, 1);
                     }
                 }
 
@@ -109,12 +106,17 @@ namespace Cartagena
                         if (cartas.Count <= 6)
                         {
                             jogou = analiseReceberCartas(j, piratas, tabuleiro, 2);
-                        }
-                        else 
-                        {
-                            this.game.pularVez(j);
-                        }
 
+                            if (!jogou)
+                            {
+                                jogou = analiseReceberCartas(j, piratas, tabuleiro, 1);
+                            }
+
+                            if (!jogou)
+                            {
+                                this.game.pularVez(j);
+                            }
+                        }
                     }
                 }
             }
