@@ -30,8 +30,6 @@ namespace Cartagena
         Partida partida;
         Jogador meuJogador;
 
-        bool automacao;
-
         HistoricoView historico;
 
         public PartidaView(Partida p, Jogador j)
@@ -58,8 +56,6 @@ namespace Cartagena
                 
                 tmrViewJogadores.Enabled = true;
                 tmrVez.Enabled = true;
-
-                automacao = false;
 
                 preencherDataGridJogadoresView();
 
@@ -347,7 +343,7 @@ namespace Cartagena
             {
                 this.historico.Show();
 
-                this.Location = new Point(this.Location.X - 250, this.Location.Y);
+                this.Location = new Point(this.Location.X - 200, this.Location.Y);
                 this.historico.Location = new Point(this.Width + this.Location.X, this.Location.Y);
             }
         }
@@ -392,7 +388,6 @@ namespace Cartagena
                         if (qtdPiratas == 6)
                         {
                             tmrVez.Enabled = false;
-                            automacao = false;
                             enviaMsg("Partida Finalizada. Vencedor(a): " + this.jogadores[i].Nome, "check");
                         }
 
@@ -422,7 +417,7 @@ namespace Cartagena
 
                 preencherDataGridJogadoresView();
 
-                if(this.meuJogador != null && jVez.Id == this.meuJogador.Id && automacao)
+                if(this.meuJogador != null && jVez.Id == this.meuJogador.Id)
                 {
                     try
                     {
@@ -625,68 +620,11 @@ namespace Cartagena
             return c;
         }
 
-        private void btnMoverAtras_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.game.voltarPirata(this.meuJogador, int.Parse(txtPosicao.Text));
-                exibirPiratas();
-                exibirCartas();
-            }
-            catch (Exception e1)
-            {
-                enviaMsg(e1.Message, "erro");
-            }
-
-        }
-
-        private void btnMoverFrente_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.game.moverPirata(this.meuJogador, int.Parse(txtPosicao.Text), txtCarta.Text);
-                exibirPiratas();
-                exibirCartas();
-            }
-            catch (Exception e1)
-            {
-                enviaMsg(e1.Message, "erro");
-            }
-        }
-
-        private void btnPularVez_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.game.pularVez(this.meuJogador);
-                exibirPiratas();
-                exibirCartas();
-            }
-            catch (Exception e1)
-            {
-                enviaMsg(e1.Message, "erro");
-            }
-        }
-
         protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = true;
             base.OnClosing(e);
         }
 
-        private void btnAutomacao_Click(object sender, EventArgs e)
-        {
-            if (automacao)
-            {
-                automacao = false;
-                btnAutomacao.ForeColor = Color.DarkRed;
-            }
-            else
-            {
-                automacao = true;
-                btnAutomacao.ForeColor = Color.Green;
-            }
-            
-        }
     }
 }

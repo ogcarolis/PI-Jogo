@@ -123,6 +123,11 @@ namespace Cartagena
 
         private bool analiseReceberCartas(Jogador j, List<Pirata> piratas, List<Elemento> tabuleiro, int qtdCartas)
         {
+            if(qtdCartas == 1)
+            {
+                piratas.Reverse();
+            }
+
             foreach (Pirata pirata in piratas)
             {
                 for (int i = pirata.Posicao - 1; i >= 1; i--)

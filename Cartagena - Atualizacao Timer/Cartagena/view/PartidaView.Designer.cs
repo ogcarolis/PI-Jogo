@@ -41,21 +41,11 @@
             this.panelCartas = new System.Windows.Forms.Panel();
             this.lbltitulo = new System.Windows.Forms.Label();
             this.tmrViewJogadores = new System.Windows.Forms.Timer(this.components);
-            this.btnMoverFrente = new System.Windows.Forms.Button();
-            this.btnMoverAtras = new System.Windows.Forms.Button();
-            this.panelJogar = new System.Windows.Forms.Panel();
-            this.txtCarta = new System.Windows.Forms.TextBox();
-            this.btnPularVez = new System.Windows.Forms.Button();
-            this.txtPosicao = new System.Windows.Forms.TextBox();
-            this.lblCarta = new System.Windows.Forms.Label();
-            this.lblPosicao = new System.Windows.Forms.Label();
             this.tmrVez = new System.Windows.Forms.Timer(this.components);
             this.lblNomePartida = new System.Windows.Forms.Label();
             this.btnVoltar = new System.Windows.Forms.Button();
-            this.btnAutomacao = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).BeginInit();
             this.panelCartas.SuspendLayout();
-            this.panelJogar.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtgJogadores
@@ -137,7 +127,7 @@
             this.btnIniciarPartida.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnIniciarPartida.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciarPartida.ForeColor = System.Drawing.Color.White;
-            this.btnIniciarPartida.Location = new System.Drawing.Point(883, 6);
+            this.btnIniciarPartida.Location = new System.Drawing.Point(561, 615);
             this.btnIniciarPartida.Name = "btnIniciarPartida";
             this.btnIniciarPartida.Size = new System.Drawing.Size(159, 34);
             this.btnIniciarPartida.TabIndex = 9;
@@ -150,7 +140,7 @@
             this.panelCartas.AutoScroll = true;
             this.panelCartas.BackColor = System.Drawing.Color.Transparent;
             this.panelCartas.Controls.Add(this.lbltitulo);
-            this.panelCartas.Location = new System.Drawing.Point(561, 212);
+            this.panelCartas.Location = new System.Drawing.Point(561, 393);
             this.panelCartas.Name = "panelCartas";
             this.panelCartas.Size = new System.Drawing.Size(481, 183);
             this.panelCartas.TabIndex = 11;
@@ -172,103 +162,6 @@
             // 
             this.tmrViewJogadores.Interval = 5000;
             this.tmrViewJogadores.Tick += new System.EventHandler(this.tmrViewJogadores_Tick);
-            // 
-            // btnMoverFrente
-            // 
-            this.btnMoverFrente.BackColor = System.Drawing.Color.Transparent;
-            this.btnMoverFrente.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMoverFrente.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMoverFrente.ForeColor = System.Drawing.Color.White;
-            this.btnMoverFrente.Location = new System.Drawing.Point(248, 73);
-            this.btnMoverFrente.Name = "btnMoverFrente";
-            this.btnMoverFrente.Size = new System.Drawing.Size(200, 46);
-            this.btnMoverFrente.TabIndex = 12;
-            this.btnMoverFrente.Text = "Mover Para Frente";
-            this.btnMoverFrente.UseVisualStyleBackColor = false;
-            this.btnMoverFrente.Click += new System.EventHandler(this.btnMoverFrente_Click);
-            // 
-            // btnMoverAtras
-            // 
-            this.btnMoverAtras.BackColor = System.Drawing.Color.Transparent;
-            this.btnMoverAtras.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMoverAtras.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMoverAtras.ForeColor = System.Drawing.Color.White;
-            this.btnMoverAtras.Location = new System.Drawing.Point(248, 16);
-            this.btnMoverAtras.Name = "btnMoverAtras";
-            this.btnMoverAtras.Size = new System.Drawing.Size(200, 46);
-            this.btnMoverAtras.TabIndex = 13;
-            this.btnMoverAtras.Text = "Mover Para Trás";
-            this.btnMoverAtras.UseVisualStyleBackColor = false;
-            this.btnMoverAtras.Click += new System.EventHandler(this.btnMoverAtras_Click);
-            // 
-            // panelJogar
-            // 
-            this.panelJogar.BackColor = System.Drawing.Color.Transparent;
-            this.panelJogar.Controls.Add(this.txtCarta);
-            this.panelJogar.Controls.Add(this.btnPularVez);
-            this.panelJogar.Controls.Add(this.txtPosicao);
-            this.panelJogar.Controls.Add(this.lblCarta);
-            this.panelJogar.Controls.Add(this.lblPosicao);
-            this.panelJogar.Controls.Add(this.btnMoverAtras);
-            this.panelJogar.Controls.Add(this.btnMoverFrente);
-            this.panelJogar.Location = new System.Drawing.Point(565, 416);
-            this.panelJogar.Name = "panelJogar";
-            this.panelJogar.Size = new System.Drawing.Size(473, 183);
-            this.panelJogar.TabIndex = 14;
-            // 
-            // txtCarta
-            // 
-            this.txtCarta.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCarta.Location = new System.Drawing.Point(92, 76);
-            this.txtCarta.Name = "txtCarta";
-            this.txtCarta.Size = new System.Drawing.Size(135, 34);
-            this.txtCarta.TabIndex = 20;
-            // 
-            // btnPularVez
-            // 
-            this.btnPularVez.BackColor = System.Drawing.Color.Transparent;
-            this.btnPularVez.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPularVez.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPularVez.ForeColor = System.Drawing.Color.White;
-            this.btnPularVez.Location = new System.Drawing.Point(124, 130);
-            this.btnPularVez.Name = "btnPularVez";
-            this.btnPularVez.Size = new System.Drawing.Size(200, 46);
-            this.btnPularVez.TabIndex = 19;
-            this.btnPularVez.Text = "Pular Vez";
-            this.btnPularVez.UseVisualStyleBackColor = false;
-            this.btnPularVez.Click += new System.EventHandler(this.btnPularVez_Click);
-            // 
-            // txtPosicao
-            // 
-            this.txtPosicao.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPosicao.Location = new System.Drawing.Point(92, 21);
-            this.txtPosicao.Name = "txtPosicao";
-            this.txtPosicao.Size = new System.Drawing.Size(135, 34);
-            this.txtPosicao.TabIndex = 18;
-            // 
-            // lblCarta
-            // 
-            this.lblCarta.AutoSize = true;
-            this.lblCarta.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCarta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(68)))), ((int)(((byte)(60)))));
-            this.lblCarta.Location = new System.Drawing.Point(10, 86);
-            this.lblCarta.Name = "lblCarta";
-            this.lblCarta.Size = new System.Drawing.Size(68, 23);
-            this.lblCarta.TabIndex = 17;
-            this.lblCarta.Text = "Carta: ";
-            this.lblCarta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblPosicao
-            // 
-            this.lblPosicao.AutoSize = true;
-            this.lblPosicao.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPosicao.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(68)))), ((int)(((byte)(60)))));
-            this.lblPosicao.Location = new System.Drawing.Point(10, 26);
-            this.lblPosicao.Name = "lblPosicao";
-            this.lblPosicao.Size = new System.Drawing.Size(78, 23);
-            this.lblPosicao.TabIndex = 16;
-            this.lblPosicao.Text = "Posição: ";
-            this.lblPosicao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tmrVez
             // 
@@ -302,30 +195,14 @@
             this.btnVoltar.UseVisualStyleBackColor = false;
             this.btnVoltar.Click += new System.EventHandler(this.btnVoltar_Click);
             // 
-            // btnAutomacao
-            // 
-            this.btnAutomacao.BackColor = System.Drawing.Color.Transparent;
-            this.btnAutomacao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAutomacao.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAutomacao.ForeColor = System.Drawing.Color.White;
-            this.btnAutomacao.Location = new System.Drawing.Point(561, 614);
-            this.btnAutomacao.Name = "btnAutomacao";
-            this.btnAutomacao.Size = new System.Drawing.Size(159, 35);
-            this.btnAutomacao.TabIndex = 19;
-            this.btnAutomacao.Text = "Automático";
-            this.btnAutomacao.UseVisualStyleBackColor = false;
-            this.btnAutomacao.Click += new System.EventHandler(this.btnAutomacao_Click);
-            // 
             // PartidaView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = global::Cartagena.Properties.Resources.fundo_partida;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1071, 663);
-            this.Controls.Add(this.btnAutomacao);
             this.Controls.Add(this.btnVoltar);
             this.Controls.Add(this.lblNomePartida);
-            this.Controls.Add(this.panelJogar);
             this.Controls.Add(this.panelCartas);
             this.Controls.Add(this.btnIniciarPartida);
             this.Controls.Add(this.panelTabuleiro);
@@ -340,8 +217,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgJogadores)).EndInit();
             this.panelCartas.ResumeLayout(false);
             this.panelCartas.PerformLayout();
-            this.panelJogar.ResumeLayout(false);
-            this.panelJogar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -355,17 +230,8 @@
         private System.Windows.Forms.Panel panelCartas;
         private System.Windows.Forms.Label lbltitulo;
         private System.Windows.Forms.Timer tmrViewJogadores;
-        private System.Windows.Forms.Button btnMoverFrente;
-        private System.Windows.Forms.Button btnMoverAtras;
-        private System.Windows.Forms.Panel panelJogar;
-        private System.Windows.Forms.Label lblCarta;
-        private System.Windows.Forms.Label lblPosicao;
         private System.Windows.Forms.Timer tmrVez;
-        private System.Windows.Forms.TextBox txtPosicao;
-        private System.Windows.Forms.Button btnPularVez;
-        private System.Windows.Forms.TextBox txtCarta;
         private System.Windows.Forms.Label lblNomePartida;
         private System.Windows.Forms.Button btnVoltar;
-        private System.Windows.Forms.Button btnAutomacao;
     }
 }
