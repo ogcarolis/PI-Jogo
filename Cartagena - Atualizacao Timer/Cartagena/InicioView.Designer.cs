@@ -322,7 +322,7 @@
             // 
             // txt_pesquisa
             // 
-            this.txt_pesquisa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(118)))), ((int)(((byte)(207)))), ((int)(((byte)(228)))));
+            this.txt_pesquisa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(216)))), ((int)(((byte)(250)))));
             this.txt_pesquisa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_pesquisa.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_pesquisa.ForeColor = System.Drawing.Color.Black;
@@ -366,6 +366,7 @@
             this.Name = "InicioView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cartagena Game";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InicioView_FormClosing);
             this.panelEntrar.ResumeLayout(false);
             this.panelEntrar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPartidas)).EndInit();

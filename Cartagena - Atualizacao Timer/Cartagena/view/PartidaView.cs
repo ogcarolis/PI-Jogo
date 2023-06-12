@@ -25,11 +25,12 @@ namespace Cartagena
         List<PictureBox> picPiratas;
 
         Game game;
+        Estrategia estrategia;
+
         Partida partida;
         Jogador meuJogador;
 
         bool automacao;
-        Random random;
 
         HistoricoView historico;
 
@@ -49,6 +50,7 @@ namespace Cartagena
                 this.picCartas = new List<PictureBox>();
 
                 this.game = new Game();
+                this.estrategia = new Estrategia();
                
                 this.tabuleiro = new List<Elemento>();
                 this.panelPosTabuleiro = new List<Panel>();
@@ -58,7 +60,6 @@ namespace Cartagena
                 tmrVez.Enabled = true;
 
                 automacao = false;
-                random = new Random();
 
                 preencherDataGridJogadoresView();
 
@@ -82,9 +83,8 @@ namespace Cartagena
             {
                 if(this.meuJogador != null)
                 {
-                    string retorno = this.game.iniciarPartida(this.meuJogador);
+                    this.game.iniciarPartida(this.meuJogador);
                     enviaMsg("Partida Iniciada! Jogador: " + this.meuJogador.Nome, "check");
-                    enviaMsg(retorno, "erro");
 
                     this.partida.Iniciou = true;
 
@@ -391,8 +391,9 @@ namespace Cartagena
 
                         if (qtdPiratas == 6)
                         {
-                            enviaMsg("Partida Finalizada. Vencedor(a): " + this.jogadores[i].Nome, "check");
                             tmrVez.Enabled = false;
+                            automacao = false;
+                            enviaMsg("Partida Finalizada. Vencedor(a): " + this.jogadores[i].Nome, "check");
                         }
 
                         qtdPiratas = 0;
@@ -423,45 +424,30 @@ namespace Cartagena
 
                 if(this.meuJogador != null && jVez.Id == this.meuJogador.Id && automacao)
                 {
-                    int carta = this.random.Next(0, this.cartas.Count);
-
-                    for (int i = 0; i <= 37; i++)
+                    try
                     {
-                        foreach (Pirata p in this.tabuleiro[i].Piratas)
-                        {
-                            if(p.Jogador.Id == this.meuJogador.Id)
-                            {
-                                this.piratas.Add(p);
-                            }
-                        }
-                    }
+                        this.piratas.Clear();
 
-                    foreach (Pirata p in this.piratas)
-                    {
-                        if(this.meuJogador.Jogada == 0)
+                        for (int i = 0; i < this.tabuleiro.Count; i++)
                         {
-                            break;
-                        }
-
-                        for(int i = p.Posicao - 1; i >= 1; i--)
-                        {
-                            if (this.tabuleiro[i].Piratas.Count > 0)
+                            foreach (Pirata p in this.tabuleiro[i].Piratas)
                             {
-                                this.game.voltarPirata(this.meuJogador, p.Posicao);
-                                exibirPiratas();
-                                exibirCartas();
-                                break;
+                                if (p.Jogador.Id == this.meuJogador.Id)
+                                {
+                                    this.piratas.Add(p);
+                                }
                             }
                         }
 
-                        if (this.cartas.Count > 1 && p.Posicao == 0)
-                        {
-                            this.game.moverPirata(this.meuJogador, 0, this.cartas[carta].Simbolo);
-                            exibirPiratas();
-                            exibirCartas();
-                            break;
-                        }
+                        this.estrategia.iniciarJogada(this.meuJogador, this.piratas, this.cartas, this.tabuleiro);
+                        exibirPiratas();
+                        exibirCartas();
                     }
+                    catch (Exception e1)
+                    {
+                        enviaMsg(e1.Message, "erro");
+                    }
+                    
                 }
             }
         }
@@ -693,7 +679,7 @@ namespace Cartagena
             if (automacao)
             {
                 automacao = false;
-                btnAutomacao.ForeColor = Color.Red;
+                btnAutomacao.ForeColor = Color.DarkRed;
             }
             else
             {
